@@ -19,8 +19,6 @@
       --bg-deep: #0a0c14;
       --bg-card: #141724;
       --bg-elevated: #1c1f30;
-      --bg-glass: rgba(22, 25, 38, 0.55);
-      --bg-glass-strong: rgba(28, 31, 48, 0.75);
       --border-subtle: rgba(255, 215, 0, 0.1);
       --border-medium: rgba(255, 215, 0, 0.22);
       --border-strong: rgba(255, 215, 0, 0.4);
@@ -31,7 +29,6 @@
       --danger-glow: rgba(255, 92, 92, 0.35);
       --success: #4ade80;
       --success-glow: rgba(74, 222, 128, 0.35);
-      --info: #60a5fa;
       --radius-xl: 32px;
       --radius-lg: 24px;
       --radius-md: 16px;
@@ -39,7 +36,6 @@
       --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
       --transition-bounce: cubic-bezier(0.34, 1.56, 0.64, 1);
       --shadow-card: 0 20px 40px -16px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 215, 0, 0.06) inset, 0 1px 0 0 rgba(255, 255, 255, 0.04) inset;
-      --shadow-elevated: 0 30px 60px -20px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(255, 215, 0, 0.12) inset;
     }
 
     * {
@@ -73,17 +69,6 @@
       -moz-osx-font-smoothing: grayscale;
     }
 
-    /* Ambient noise */
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.02'/%3E%3C/svg%3E");
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Fluid animated background blobs */
     .bg-blob {
       position: fixed;
       border-radius: 50%;
@@ -156,7 +141,6 @@
       -webkit-backdrop-filter: blur(20px) saturate(1.3);
     }
 
-    /* ============ ACCESS SCREEN ============ */
     .access-screen {
       position: absolute;
       inset: 0;
@@ -193,7 +177,6 @@
       -webkit-backdrop-filter: blur(30px) saturate(1.6);
       position: relative;
       overflow: hidden;
-      transition: transform 0.3s var(--transition-smooth);
     }
 
     .access-card::before {
@@ -213,7 +196,6 @@
       50% { opacity: 1; transform: translate(20px, 10px); }
     }
 
-    /* Skeuomorphic logo */
     .access-logo {
       width: 80px;
       height: 80px;
@@ -235,15 +217,6 @@
 
     .access-logo:hover {
       transform: scale(1.05) rotate(-2deg);
-    }
-
-    .access-logo::after {
-      content: '';
-      position: absolute;
-      inset: 3px;
-      border-radius: 23px;
-      border: 1px solid rgba(255, 215, 0, 0.1);
-      pointer-events: none;
     }
 
     .access-logo i {
@@ -268,7 +241,6 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
       margin-bottom: 8px;
-      position: relative;
       animation: gradientShift 4s ease-in-out infinite;
     }
 
@@ -283,14 +255,12 @@
       font-weight: 400;
       margin-bottom: 36px;
       letter-spacing: 0.2px;
-      position: relative;
     }
 
     .access-input-group {
       display: flex;
       flex-direction: column;
       gap: 14px;
-      position: relative;
     }
 
     .access-input-wrapper {
@@ -317,7 +287,6 @@
       font-size: 16px;
       font-weight: 600;
       color: var(--text-primary);
-      text-align: left;
       letter-spacing: 3px;
       transition: all 0.3s var(--transition-smooth);
       outline: none;
@@ -326,8 +295,6 @@
       box-shadow: 
         0 4px 12px -4px rgba(0, 0, 0, 0.6) inset,
         0 1px 0 0 rgba(255, 255, 255, 0.04);
-      position: relative;
-      z-index: 1;
     }
 
     .access-input-group input:focus {
@@ -335,8 +302,7 @@
       box-shadow: 
         0 0 0 4px var(--gold-glow),
         0 0 40px -8px var(--gold-glow),
-        0 4px 12px -4px rgba(0, 0, 0, 0.6) inset,
-        0 1px 0 0 rgba(255, 255, 255, 0.06);
+        0 4px 12px -4px rgba(0, 0, 0, 0.6) inset;
       background: rgba(7, 9, 15, 0.9);
       transform: translateY(-1px);
     }
@@ -373,7 +339,6 @@
       90% { transform: translateX(3px); }
     }
 
-    /* Skeuomorphic button */
     .access-input-group button {
       background: linear-gradient(180deg, #FFE599 0%, #FFD966 40%, #E6B422 100%);
       border: none;
@@ -387,8 +352,7 @@
       box-shadow: 
         0 10px 24px -8px rgba(255, 215, 0, 0.5),
         0 2px 0 0 rgba(255, 255, 255, 0.4) inset,
-        0 -3px 0 0 rgba(180, 130, 0, 0.5) inset,
-        0 1px 0 0 rgba(255, 255, 255, 0.3);
+        0 -3px 0 0 rgba(180, 130, 0, 0.5) inset;
       letter-spacing: 0.3px;
       display: flex;
       align-items: center;
@@ -422,10 +386,6 @@
 
     .access-input-group button:active {
       transform: translateY(1px);
-      box-shadow: 
-        0 6px 16px -6px rgba(255, 215, 0, 0.4),
-        0 2px 0 0 rgba(255, 255, 255, 0.3) inset,
-        0 -1px 0 0 rgba(180, 130, 0, 0.5) inset;
     }
 
     .access-hint {
@@ -469,14 +429,12 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ============ DASHBOARD ============ */
     .dashboard {
       display: flex;
       flex-direction: column;
       padding: clamp(16px, 3vw, 32px) clamp(14px, 3vw, 32px) clamp(24px, 4vw, 40px);
       min-height: 720px;
       animation: fadeInUp 0.7s var(--transition-smooth);
-      position: relative;
     }
 
     @keyframes fadeInUp {
@@ -484,7 +442,6 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* Glassmorphic inactive banner */
     .inactive-banner {
       background: linear-gradient(135deg, rgba(255, 92, 92, 0.12), rgba(255, 92, 92, 0.04));
       border: 1px solid rgba(255, 92, 92, 0.25);
@@ -499,12 +456,9 @@
       color: #ff9b9b;
       font-weight: 500;
       font-size: clamp(12px, 1.8vw, 14.5px);
-      letter-spacing: 0.1px;
       position: relative;
       overflow: hidden;
-      box-shadow: 
-        0 8px 24px -8px rgba(255, 92, 92, 0.15),
-        0 1px 0 0 rgba(255, 255, 255, 0.04) inset;
+      box-shadow: 0 8px 24px -8px rgba(255, 92, 92, 0.15);
       transition: all 0.4s var(--transition-smooth);
     }
 
@@ -539,7 +493,6 @@
       flex-shrink: 0;
     }
 
-    /* Skeuomorphic activate button */
     .activate-btn {
       background: linear-gradient(180deg, #ff7b7b 0%, #ff4757 50%, #e63946 100%);
       border: none;
@@ -558,10 +511,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      letter-spacing: 0.2px;
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
-      position: relative;
-      overflow: hidden;
     }
 
     .activate-btn:hover {
@@ -585,7 +535,6 @@
       pointer-events: none;
     }
 
-    /* Top bar */
     .top-bar {
       display: flex;
       align-items: center;
@@ -601,7 +550,6 @@
       gap: 14px;
     }
 
-    /* Skeuomorphic brand icon */
     .brand-icon {
       width: 48px;
       height: 48px;
@@ -650,7 +598,6 @@
       font-weight: 500;
     }
 
-    /* Glassmorphic voice support */
     .voice-support {
       background: rgba(28, 31, 48, 0.5);
       border-radius: 60px;
@@ -667,24 +614,7 @@
       backdrop-filter: blur(12px) saturate(1.4);
       -webkit-backdrop-filter: blur(12px) saturate(1.4);
       user-select: none;
-      box-shadow: 
-        0 4px 16px -6px rgba(0, 0, 0, 0.5),
-        0 1px 0 0 rgba(255, 255, 255, 0.06) inset;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .voice-support::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, transparent, rgba(255, 215, 0, 0.05), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .voice-support:hover::before {
-      opacity: 1;
+      box-shadow: 0 4px 16px -6px rgba(0, 0, 0, 0.5);
     }
 
     .voice-support i {
@@ -700,8 +630,7 @@
       transform: translateY(-1px);
       box-shadow: 
         0 8px 24px -6px rgba(0, 0, 0, 0.6),
-        0 0 30px -10px var(--gold-glow),
-        0 1px 0 0 rgba(255, 255, 255, 0.08) inset;
+        0 0 30px -10px var(--gold-glow);
     }
 
     .voice-support:hover i {
@@ -717,7 +646,6 @@
       50% { transform: scale(1.25); }
     }
 
-    /* Grid */
     .dashboard-grid {
       display: grid;
       grid-template-columns: 1.15fr 0.9fr 1.05fr;
@@ -725,7 +653,6 @@
       align-items: start;
     }
 
-    /* Glassmorphic cards */
     .card {
       background: rgba(22, 25, 38, 0.45);
       border-radius: var(--radius-lg);
@@ -768,8 +695,7 @@
       box-shadow: 
         0 28px 52px -20px rgba(0, 0, 0, 0.85),
         0 0 60px -25px var(--gold-glow),
-        0 0 0 1px rgba(255, 215, 0, 0.1) inset,
-        0 1px 0 0 rgba(255, 255, 255, 0.06) inset;
+        0 0 0 1px rgba(255, 215, 0, 0.1) inset;
     }
 
     .card:hover::before {
@@ -791,7 +717,6 @@
       font-size: clamp(13px, 1.8vw, 15.5px);
       font-weight: 600;
       color: var(--text-primary);
-      letter-spacing: -0.1px;
       display: flex;
       align-items: center;
       gap: 10px;
@@ -816,7 +741,6 @@
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid transparent;
-      position: relative;
     }
 
     .card-header .header-action:hover {
@@ -830,7 +754,6 @@
       transform: scale(0.95);
     }
 
-    /* New members list */
     .new-members-list {
       display: flex;
       flex-direction: column;
@@ -882,10 +805,7 @@
       flex-shrink: 0;
       letter-spacing: 0.5px;
       transition: all 0.3s var(--transition-smooth);
-      box-shadow: 
-        0 4px 10px -4px rgba(0, 0, 0, 0.6),
-        0 1px 0 0 rgba(255, 255, 255, 0.05) inset;
-      position: relative;
+      box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.6);
     }
 
     .member-item:hover .member-avatar {
@@ -893,8 +813,7 @@
       transform: scale(1.05);
       box-shadow: 
         0 6px 16px -4px rgba(0, 0, 0, 0.7),
-        0 0 20px -6px var(--gold-glow),
-        0 1px 0 0 rgba(255, 255, 255, 0.08) inset;
+        0 0 20px -6px var(--gold-glow);
     }
 
     .member-details {
@@ -906,7 +825,6 @@
       font-size: clamp(13px, 1.6vw, 14.5px);
       font-weight: 600;
       color: var(--text-primary);
-      letter-spacing: -0.1px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -927,7 +845,6 @@
       filter: drop-shadow(0 0 4px var(--success-glow));
     }
 
-    /* Feed */
     .feed-item {
       display: flex;
       gap: 14px;
@@ -935,7 +852,6 @@
       border-radius: var(--radius-sm);
       transition: all 0.25s var(--transition-smooth);
       cursor: pointer;
-      position: relative;
     }
 
     .feed-item:hover {
@@ -955,18 +871,12 @@
       font-size: 14px;
       flex-shrink: 0;
       border: 1px solid var(--border-subtle);
-      box-shadow: 
-        0 4px 10px -4px rgba(0, 0, 0, 0.5),
-        0 1px 0 0 rgba(255, 255, 255, 0.05) inset;
+      box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.5);
       transition: all 0.3s var(--transition-smooth);
     }
 
     .feed-item:hover .feed-icon {
       transform: scale(1.1) rotate(-5deg);
-      box-shadow: 
-        0 6px 16px -4px rgba(0, 0, 0, 0.6),
-        0 0 20px -8px var(--gold-glow),
-        0 1px 0 0 rgba(255, 255, 255, 0.08) inset;
     }
 
     .feed-text {
@@ -994,7 +904,6 @@
       font-size: 9px;
     }
 
-    /* Badge & points */
     .badge-points {
       display: flex;
       align-items: center;
@@ -1002,7 +911,6 @@
       margin-bottom: clamp(14px, 2vw, 18px);
     }
 
-    /* Skeuomorphic badge */
     .badge-icon {
       flex: 1;
       background: linear-gradient(145deg, rgba(255, 215, 0, 0.12), rgba(255, 215, 0, 0.03));
@@ -1015,10 +923,7 @@
       border: 1px solid var(--border-medium);
       position: relative;
       overflow: hidden;
-      box-shadow: 
-        0 6px 16px -6px rgba(0, 0, 0, 0.6),
-        0 1px 0 0 rgba(255, 255, 255, 0.06) inset,
-        0 -1px 0 0 rgba(0, 0, 0, 0.3) inset;
+      box-shadow: 0 6px 16px -6px rgba(0, 0, 0, 0.6);
     }
 
     .badge-icon::before {
@@ -1047,12 +952,10 @@
       font-weight: 700;
       color: var(--gold);
       font-size: clamp(12px, 1.6vw, 13.5px);
-      letter-spacing: 0.2px;
       position: relative;
       z-index: 1;
     }
 
-    /* Glassmorphic points */
     .points {
       background: rgba(28, 31, 48, 0.6);
       border-radius: 100px;
@@ -1066,9 +969,7 @@
       gap: 4px;
       white-space: nowrap;
       backdrop-filter: blur(10px);
-      box-shadow: 
-        0 4px 12px -4px rgba(0, 0, 0, 0.5),
-        0 1px 0 0 rgba(255, 255, 255, 0.04) inset;
+      box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.5);
       transition: all 0.3s var(--transition-smooth);
     }
 
@@ -1076,8 +977,7 @@
       border-color: var(--border-medium);
       box-shadow: 
         0 6px 16px -4px rgba(0, 0, 0, 0.6),
-        0 0 20px -8px var(--gold-glow),
-        0 1px 0 0 rgba(255, 255, 255, 0.06) inset;
+        0 0 20px -8px var(--gold-glow);
     }
 
     .points span {
@@ -1085,11 +985,9 @@
       font-size: clamp(15px, 2.2vw, 18px);
       font-weight: 800;
       margin-right: 2px;
-      letter-spacing: -0.5px;
       filter: drop-shadow(0 0 8px var(--gold-glow));
     }
 
-    /* Profile mini */
     .profile-mini {
       display: flex;
       align-items: center;
@@ -1121,7 +1019,6 @@
       font-size: clamp(14px, 1.8vw, 16px);
       font-weight: 600;
       color: var(--text-primary);
-      letter-spacing: -0.2px;
     }
 
     .profile-mini p {
@@ -1139,7 +1036,6 @@
       filter: drop-shadow(0 0 4px var(--success-glow));
     }
 
-    /* Digital card */
     .digital-card-wrapper {
       perspective: 1200px;
       display: flex;
@@ -1167,7 +1063,6 @@
       transform: rotateY(5deg) rotateX(3deg) scale(1.02);
     }
 
-    /* Animated glow borders */
     .digital-card::before {
       content: "";
       position: absolute;
@@ -1269,7 +1164,6 @@
       font-size: clamp(18px, 2.5vw, 21px);
       font-weight: 700;
       color: var(--text-primary);
-      letter-spacing: -0.4px;
     }
 
     .card-details .member-id {
@@ -1298,7 +1192,6 @@
       font-weight: 500;
     }
 
-    /* Skeuomorphic chip */
     .card-chip {
       width: 44px;
       height: 33px;
@@ -1308,8 +1201,7 @@
       box-shadow: 
         0 3px 8px rgba(0,0,0,0.5),
         0 0 0 1px rgba(255, 215, 0, 0.3) inset,
-        0 2px 0 0 rgba(255, 255, 255, 0.3) inset,
-        0 -2px 0 0 rgba(0, 0, 0, 0.2) inset;
+        0 2px 0 0 rgba(255, 255, 255, 0.3) inset;
       position: relative;
     }
 
@@ -1347,11 +1239,8 @@
       color: #e0e4fc;
       font-size: clamp(10px, 1.3vw, 11.5px);
       font-weight: 600;
-      letter-spacing: 0.3px;
       backdrop-filter: blur(8px);
-      box-shadow: 
-        0 4px 10px -4px rgba(0, 0, 0, 0.5),
-        0 1px 0 0 rgba(255, 255, 255, 0.08) inset;
+      box-shadow: 0 4px 10px -4px rgba(0, 0, 0, 0.5);
       transition: all 0.3s var(--transition-smooth);
     }
 
@@ -1365,7 +1254,6 @@
       font-size: 14px;
     }
 
-    /* Action buttons */
     .card-actions {
       display: flex;
       gap: 10px;
@@ -1386,33 +1274,13 @@
       gap: 7px;
       cursor: pointer;
       transition: all 0.3s var(--transition-smooth);
-      letter-spacing: 0.2px;
       backdrop-filter: blur(10px);
-      box-shadow: 
-        0 4px 12px -4px rgba(0, 0, 0, 0.5),
-        0 1px 0 0 rgba(255, 255, 255, 0.04) inset;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .action-btn::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(135deg, transparent, rgba(255, 215, 0, 0.08), transparent);
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    .action-btn:hover::before {
-      opacity: 1;
+      box-shadow: 0 4px 12px -4px rgba(0, 0, 0, 0.5);
     }
 
     .action-btn i {
       color: var(--gold);
       font-size: 13px;
-      position: relative;
-      z-index: 1;
     }
 
     .action-btn:hover {
@@ -1422,15 +1290,13 @@
       transform: translateY(-2px);
       box-shadow: 
         0 8px 20px -6px rgba(0, 0, 0, 0.6),
-        0 0 24px -10px var(--gold-glow),
-        0 1px 0 0 rgba(255, 255, 255, 0.06) inset;
+        0 0 24px -10px var(--gold-glow);
     }
 
     .action-btn:active {
       transform: translateY(0);
     }
 
-    /* Voice toast */
     .voice-toast {
       position: fixed;
       bottom: clamp(16px, 3vw, 32px);
@@ -1452,7 +1318,6 @@
       transition: transform 0.5s var(--transition-bounce);
       z-index: 200;
       pointer-events: none;
-      letter-spacing: 0.2px;
       max-width: 90vw;
       text-shadow: 0 1px 0 rgba(255, 255, 255, 0.3);
     }
@@ -1465,7 +1330,6 @@
       font-size: 18px;
     }
 
-    /* ============ MODAL (Full Members) ============ */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -1526,7 +1390,6 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      letter-spacing: -0.3px;
     }
 
     .modal-header h2 i {
@@ -1661,7 +1524,6 @@
       padding: 10px 12px;
       border-radius: var(--radius-sm);
       transition: all 0.2s var(--transition-smooth);
-      cursor: default;
       position: relative;
     }
 
@@ -1698,7 +1560,6 @@
       flex-shrink: 0;
     }
 
-    /* Responsive */
     @media (max-width: 1080px) {
       .dashboard-grid {
         grid-template-columns: 1fr 1fr;
@@ -1821,7 +1682,6 @@
       }
     }
 
-    /* Focus visible for accessibility */
     :focus-visible {
       outline: 2px solid var(--gold);
       outline-offset: 3px;
@@ -1830,13 +1690,11 @@
   </style>
 </head>
 <body>
-  <!-- Background blobs -->
   <div class="bg-blob bg-blob-1"></div>
   <div class="bg-blob bg-blob-2"></div>
   <div class="bg-blob bg-blob-3"></div>
 
   <div class="app-container" id="appContainer">
-    <!-- ============ ACCESS SCREEN ============ -->
     <div class="access-screen" id="accessScreen">
       <div class="access-card">
         <div class="access-logo">
@@ -1858,18 +1716,15 @@
       </div>
     </div>
 
-    <!-- ============ DASHBOARD ============ -->
     <div class="dashboard" id="dashboard" style="display: none;">
-      <!-- Inactive banner -->
       <div class="inactive-banner" id="inactiveBanner">
         <div class="inactive-banner-content">
           <i class="fas fa-exclamation-circle"></i>
-          <span>Account inactive — please activate to enable full membership benefits.</span>
+          <span id="bannerText">Account inactive — please activate to enable full membership benefits.</span>
         </div>
         <button class="activate-btn" id="activateBtn"><i class="fas fa-bolt"></i> Activate Now</button>
       </div>
 
-      <!-- Top bar -->
       <div class="top-bar">
         <div class="brand">
           <div class="brand-icon">
@@ -1886,10 +1741,8 @@
         </div>
       </div>
 
-      <!-- Main grid -->
       <div class="dashboard-grid">
-        <!-- New members -->
-        <div class="card" id="newMembersCard">
+        <div class="card">
           <div class="card-header">
             <h3><i class="fas fa-user-plus"></i> New members</h3>
             <span class="header-action" id="openMembersModal" role="button" tabindex="0" aria-label="View all members"><i class="fas fa-chevron-right"></i></span>
@@ -1897,7 +1750,6 @@
           <div class="new-members-list" id="newMembersList"></div>
         </div>
 
-        <!-- Latest content -->
         <div class="card">
           <div class="card-header">
             <h3><i class="fas fa-newspaper"></i> Latest content</h3>
@@ -1906,14 +1758,12 @@
           <div id="feedList"></div>
         </div>
 
-        <!-- Membership -->
         <div class="card">
           <div class="card-header">
             <h3><i class="fas fa-id-card"></i> Membership</h3>
             <span class="header-action"><i class="fas fa-gem"></i></span>
           </div>
 
-          <!-- Badge & points -->
           <div class="badge-points">
             <div class="badge-icon">
               <i class="fas fa-medal"></i>
@@ -1924,7 +1774,6 @@
             </div>
           </div>
 
-          <!-- Profile mini -->
           <div class="profile-mini">
             <div class="member-avatar" id="profileAvatar">JD</div>
             <div>
@@ -1933,7 +1782,6 @@
             </div>
           </div>
 
-          <!-- Digital card -->
           <div class="digital-card-wrapper">
             <div class="digital-card" id="digitalCard">
               <div class="card-content">
@@ -1957,7 +1805,6 @@
             </div>
           </div>
 
-          <!-- Actions -->
           <div class="card-actions">
             <div class="action-btn" id="exportPngBtn" role="button" tabindex="0"><i class="fas fa-download"></i> PNG</div>
             <div class="action-btn" id="exportWalletBtn" role="button" tabindex="0"><i class="fab fa-apple"></i> Wallet</div>
@@ -1967,7 +1814,6 @@
       </div>
     </div>
 
-    <!-- ============ FULL MEMBERS MODAL ============ -->
     <div class="modal-overlay" id="membersModal">
       <div class="modal-container">
         <div class="modal-header">
@@ -1990,7 +1836,6 @@
       </div>
     </div>
 
-    <!-- Voice toast -->
     <div class="voice-toast" id="voiceToast">
       <i class="fas fa-volume-up"></i>
       <span id="voiceMessage">Voice support active</span>
@@ -1998,553 +1843,534 @@
   </div>
 
   <script>
-    (function() {
-      'use strict';
+    // Wrap in try/catch to prevent blank screen on error
+    try {
+      (function() {
+        'use strict';
 
-      // ============ CONFIG ============
-      const ACCESS_CODE = "2603";
-      const SUPPORT_EMAIL = "org.topdawgrecords@gmail.com";
-      const MEMBER = {
-        name: "Jordan D.",
-        initials: "JD",
-        memberId: "TDR-2603-88",
-        since: "2024",
-        points: 2480,
-        badge: "Gold Fan"
-      };
+        var ACCESS_CODE = "2603";
+        var SUPPORT_EMAIL = "org.topdawgrecords@gmail.com";
+        var MEMBER = {
+          name: "Jordan D.",
+          initials: "JD",
+          memberId: "TDR-2603-88",
+          since: "2024",
+          points: 2480,
+          badge: "Gold Fan"
+        };
 
-      // ============ DOM REFS ============
-      const accessScreen = document.getElementById('accessScreen');
-      const dashboard = document.getElementById('dashboard');
-      const accessInput = document.getElementById('accessInput');
-      const accessBtn = document.getElementById('accessBtn');
-      const accessError = document.getElementById('accessError');
-      const voiceSupportBtn = document.getElementById('voiceSupportBtn');
-      const voiceToast = document.getElementById('voiceToast');
-      const voiceMessage = document.getElementById('voiceMessage');
-      const activateBtn = document.getElementById('activateBtn');
-      const exportPngBtn = document.getElementById('exportPngBtn');
-      const exportWalletBtn = document.getElementById('exportWalletBtn');
-      const exportDocBtn = document.getElementById('exportDocBtn');
-      const newMembersList = document.getElementById('newMembersList');
-      const feedList = document.getElementById('feedList');
-      const profileAvatar = document.getElementById('profileAvatar');
-      const profileName = document.getElementById('profileName');
-      const profileMemberSince = document.getElementById('profileMemberSince');
-      const cardHolderName = document.getElementById('cardHolderName');
-      const cardMemberId = document.getElementById('cardMemberId');
-      const cardFooterName = document.getElementById('cardFooterName');
-      const openMembersModal = document.getElementById('openMembersModal');
-      const membersModal = document.getElementById('membersModal');
-      const closeModalBtn = document.getElementById('closeModalBtn');
-      const fullMembersList = document.getElementById('fullMembersList');
-      const totalMembersCount = document.getElementById('totalMembersCount');
-      const memberSearchInput = document.getElementById('memberSearchInput');
-      const modalBody = document.getElementById('modalBody');
+        // DOM refs
+        var accessScreen = document.getElementById('accessScreen');
+        var dashboard = document.getElementById('dashboard');
+        var accessInput = document.getElementById('accessInput');
+        var accessBtn = document.getElementById('accessBtn');
+        var accessError = document.getElementById('accessError');
+        var voiceSupportBtn = document.getElementById('voiceSupportBtn');
+        var voiceToast = document.getElementById('voiceToast');
+        var voiceMessage = document.getElementById('voiceMessage');
+        var activateBtn = document.getElementById('activateBtn');
+        var bannerText = document.getElementById('bannerText');
+        var exportPngBtn = document.getElementById('exportPngBtn');
+        var exportWalletBtn = document.getElementById('exportWalletBtn');
+        var exportDocBtn = document.getElementById('exportDocBtn');
+        var newMembersList = document.getElementById('newMembersList');
+        var feedList = document.getElementById('feedList');
+        var profileAvatar = document.getElementById('profileAvatar');
+        var profileName = document.getElementById('profileName');
+        var profileMemberSince = document.getElementById('profileMemberSince');
+        var cardHolderName = document.getElementById('cardHolderName');
+        var cardMemberId = document.getElementById('cardMemberId');
+        var cardFooterName = document.getElementById('cardFooterName');
+        var openMembersModal = document.getElementById('openMembersModal');
+        var membersModal = document.getElementById('membersModal');
+        var closeModalBtn = document.getElementById('closeModalBtn');
+        var fullMembersList = document.getElementById('fullMembersList');
+        var totalMembersCount = document.getElementById('totalMembersCount');
+        var memberSearchInput = document.getElementById('memberSearchInput');
 
-      // ============ DATA ============
-      const firstNames = ['Alex', 'Sam', 'Taylor', 'Jamie', 'Jordan', 'Casey', 'Riley', 'Morgan', 'Quinn', 'Avery', 'Parker', 'Skyler', 'Dakota', 'Reese', 'Finley', 'Rowan', 'Sage', 'Blake', 'Emery', 'Charlie', 'Luna', 'Kai', 'Nova', 'Orion', 'Jade', 'Leo', 'Maya', 'Ezra', 'Iris', 'Miles', 'Zoe', 'Luca', 'Aria', 'Ethan', 'Chloe', 'Mason', 'Lily', 'Logan', 'Ava', 'Elijah'];
-      const lastNames = ['Rivera', '()Chen', 'M.', 'Fox', 'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin', 'Lee', 'Perez', 'Thompson', 'White', 'Harris', 'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson', 'Walker', 'Young', 'Allen', 'King', 'Wright', 'Scott'];
-      const badges = ['New Fan', 'Rising Star', 'Gold Fan', 'Platinum', 'Diamond', 'Super Fan', 'Legend', 'VIP'];
+        // Data
+        var firstNames = ['Alex', 'Sam', 'Taylor', 'Jamie', 'Jordan', 'Casey', 'Riley', 'Morgan', 'Quinn', 'Avery', 'Parker', 'Skyler', 'Dakota', 'Reese', 'Finley', 'Rowan', 'Sage', 'Blake', 'Emery', 'Charlie', 'Luna', 'Kai', 'Nova', 'Orion', 'Jade', 'Leo', 'Maya', 'Ezra', 'Iris', 'Miles'];
+        var lastNames = ['Rivera', 'Chen', 'M.', 'Fox', 'Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 'Thomas'];
+        var badges = ['New Fan', 'Rising Star', 'Gold Fan', 'Platinum', 'Diamond', 'Super Fan', 'Legend', 'VIP'];
 
-      // Generate 1000 random members
-      function generateRandomMembers(count) {
-        const members = [];
-        for (let i = 0; i < count; i++) {
-          const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-          const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-          const name = `${firstName} ${lastName}`;
-          const initials = (firstName[0] + (lastName[0] || '')).toUpperCase();
-          const badge = badges[Math.floor(Math.random * badges.length)];
-          const joinHours = Math.floor(Math.random() * 168); // within a week
-          let joinDate;
-          if (joinHours < 1) joinDate = 'Just now';
-          else if (joinHours < 24) joinDate = `${joinHours} hour${joinHours > 1 ? 's' : ''} ago`;
-          else {
-            const days = Math.floor(joinHours / 24);
-            joinDate = `${days} day${days > 1 ? 's' : ''} ago`;
+        function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+
+        function generateMembers(count) {
+          var members = [];
+          for (var i = 0; i < count; i++) {
+            var fn = rand(firstNames);
+            var ln = rand(lastNames);
+            var name = fn + ' ' + ln;
+            var initials = (fn.charAt(0) + (ln.charAt(0) || '')).toUpperCase();
+            var badge = rand(badges);
+            var hours = Math.floor(Math.random() * 168);
+            var joinDate;
+            if (hours < 1) joinDate = 'Just now';
+            else if (hours < 24) joinDate = hours + ' hour' + (hours > 1 ? 's' : '') + ' ago';
+            else {
+              var days = Math.floor(hours / 24);
+              joinDate = days + ' day' + (days > 1 ? 's' : '') + ' ago';
+            }
+            members.push({ name: name, initials: initials, badge: badge, joinDate: joinDate, id: i });
           }
-          members.push({ name, initials, badge, joinDate, id: i });
+          return members;
         }
-        return members;
-      }
 
-      let allMembers = generateRandomMembers(1000);
-      let filteredMembers = [...allMembers];
+        var allMembers = generateMembers(1000);
+        var filteredMembers = allMembers.slice();
 
-      const newMembers = [
-        { name: "Alex Rivera", initials: "AR", joinDate: "2 hours ago" },
-        { name: "Sam Chen", initials: "SC", joinDate: "5 hours ago" },
-        { name: "Taylor M.", initials: "TM", joinDate: "Yesterday" },
-        { name: "Jamie Fox", initials: "JF", joinDate: "2 days ago" }
-      ];
+        var newMembers = [
+          { name: "Alex Rivera", initials: "AR", joinDate: "2 hours ago" },
+          { name: "Sam Chen", initials: "SC", joinDate: "5 hours ago" },
+          { name: "Taylor M.", initials: "TM", joinDate: "Yesterday" },
+          { name: "Jamie Fox", initials: "JF", joinDate: "2 days ago" }
+        ];
 
-      const feedItems = [
-        { icon: "fa-music", text: "New single 'Midnight Howl' drops Friday", time: "1h ago" },
-        { icon: "fa-video", text: "Behind the scenes: Studio session with Luna", time: "3h ago" },
-        { icon: "fa-gift", text: "Exclusive merch for Gold members", time: "1d ago" },
-        { icon: "fa-calendar", text: "Live Q&A with Top Dog artists", time: "2d ago" }
-      ];
+        var feedItems = [
+          { icon: "fa-music", text: "New single 'Midnight Howl' drops Friday", time: "1h ago" },
+          { icon: "fa-video", text: "Behind the scenes: Studio session with Luna", time: "3h ago" },
+          { icon: "fa-gift", text: "Exclusive merch for Gold members", time: "1d ago" },
+          { icon: "fa-calendar", text: "Live Q&A with Top Dog artists", time: "2d ago" }
+        ];
 
-      // ============ VOICE SUPPORT ============
-      let speechSynth = window.speechSynthesis || null;
-      let isSpeaking = false;
+        // Voice
+        var speechSynth = window.speechSynthesis || null;
 
-      function speak(text) {
-        voiceMessage.textContent = text.length > 80 ? text.substring(0, 77) + '...' : text;
-        voiceToast.classList.add('show');
+        function speak(text) {
+          voiceMessage.textContent = text.length > 80 ? text.substring(0, 77) + '...' : text;
+          voiceToast.classList.add('show');
 
-        if (window._voiceTimeout) clearTimeout(window._voiceTimeout);
-        window._voiceTimeout = setTimeout(() => {
-          voiceToast.classList.remove('show');
-        }, 3200);
+          if (window._voiceTimeout) clearTimeout(window._voiceTimeout);
+          window._voiceTimeout = setTimeout(function() {
+            voiceToast.classList.remove('show');
+          }, 3200);
 
-        if (speechSynth) {
-          speechSynth.cancel();
-          const utterance = new SpeechSynthesisUtterance(text);
-          utterance.rate = 0.95;
-          utterance.pitch = 1.0;
-          utterance.volume = 1;
-          utterance.lang = 'en-US';
-          utterance.onstart = () => {
-            isSpeaking = true;
-            voiceSupportBtn.classList.add('speaking');
-          };
-          utterance.onend = () => {
-            isSpeaking = false;
-            voiceSupportBtn.classList.remove('speaking');
-          };
-          utterance.onerror = () => {
-            isSpeaking = false;
-            voiceSupportBtn.classList.remove('speaking');
-          };
-          speechSynth.speak(utterance);
-        }
-      }
-
-      // ============ RENDER FUNCTIONS ============
-      function renderNewMembers() {
-        newMembersList.innerHTML = newMembers.map(m => `
-          <div class="member-item">
-            <div class="member-avatar">${m.initials}</div>
-            <div class="member-details">
-              <h4>${m.name}</h4>
-              <p><i class="fas fa-circle"></i> Joined ${m.joinDate}</p>
-            </div>
-          </div>
-        `).join('');
-      }
-
-      function renderFeed() {
-        feedList.innerHTML = feedItems.map(f => `
-          <div class="feed-item">
-            <div class="feed-icon"><i class="fas ${f.icon}"></i></div>
-            <div class="feed-text">
-              <p>${f.text}</p>
-              <span><i class="fas fa-clock"></i> ${f.time}</span>
-            </div>
-          </div>
-        `).join('');
-      }
-
-      function renderMemberInfo() {
-        profileAvatar.textContent = MEMBER.initials;
-        profileName.textContent = MEMBER.name;
-        profileMemberSince.innerHTML = `<i class="fas fa-circle"></i> Member since ${MEMBER.since}`;
-        cardHolderName.textContent = MEMBER.name;
-        cardMemberId.innerHTML = `<i class="fas fa-hashtag"></i> ${MEMBER.memberId}`;
-        cardFooterName.textContent = MEMBER.name.toUpperCase();
-      }
-
-      function renderFullMembers(members) {
-        const display = members.slice(0, 1000); // safety cap
-        fullMembersList.innerHTML = display.map(m => `
-          <div class="full-member-row">
-            <div class="member-avatar">${m.initials}</div>
-            <div class="member-details">
-              <h4>${escapeHtml(m.name)}</h4>
-              <p><i class="fas fa-circle"></i> Joined ${m.joinDate}</p>
-            </div>
-            <span class="member-badge">${m.badge}</span>
-          </div>
-        `).join('');
-        totalMembersCount.textContent = display.length;
-      }
-
-      function escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-      }
-
-      // ============ MODAL ============
-      function openModal() {
-        renderFullMembers(filteredMembers);
-        membersModal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-        setTimeout(() => memberSearchInput.focus(), 300);
-      }
-
-      function closeModal() {
-        membersModal.classList.remove('active');
-        document.body.style.overflow = '';
-        memberSearchInput.value = '';
-        filteredMembers = [...allMembers];
-      }
-
-      // ============ MEMBER SEARCH ============
-      function filterMembers(query) {
-        const q = query.toLowerCase().trim();
-        if (!q) {
-          filteredMembers = [...allMembers];
-        } else {
-          filteredMembers = allMembers.filter(m => 
-            m.name.toLowerCase().includes(q) || 
-            m.badge.toLowerCase().includes(q)
-          );
-        }
-        renderFullMembers(filteredMembers);
-      }
-
-      // ============ ACCESS CONTROL ============
-      function grantAccess() {
-        accessScreen.classList.add('hidden');
-        dashboard.style.display = 'flex';
-
-        renderNewMembers();
-        renderFeed();
-        renderMemberInfo();
-
-        setTimeout(() => {
-          speak('Welcome Jordan. Your account is currently inactive. Please activate to unlock full membership benefits.');
-        }, 700);
-      }
-
-      function checkAccess() {
-        const entered = accessInput.value.trim();
-        if (entered === ACCESS_CODE) {
-          accessError.classList.remove('show');
-          accessInput.classList.remove('error');
-          grantAccess();
-        } else {
-          accessInput.classList.add('error');
-          accessError.classList.add('show');
-          accessInput.value = '';
-          accessInput.focus();
-
-          accessInput.style.animation = 'none';
-          accessInput.offsetHeight;
-          accessInput.style.animation = 'shake 0.5s var(--transition-smooth)';
-
-          speak('Invalid access code. Please try again.');
-
-          setTimeout(() => accessInput.classList.remove('error'), 1200);
-          setTimeout(() => accessError.classList.remove('show'), 2500);
-        }
-      }
-
-      // ============ ACTIVATE (GMAIL REDIRECT) ============
-      function activateAccount() {
-        speak('Opening Gmail to send activation request to support.');
-        
-        const subject = encodeURIComponent('Account Activation Request — Top Dog Records Fan Portal');
-        const body = encodeURIComponent(
-`Hello Top Dog Records Support Team,
-
-I would like to request activation of my fan membership account.
-
-Member Details:
-• Name: ${MEMBER.name}
-• Member ID: ${MEMBER.memberId}
-• Member Since: ${MEMBER.since}
-• Current Badge: ${MEMBER.badge}
-• Fan Points: ${MEMBER.points.toLocaleString()}
-
-Please activate my account so I can access full membership benefits.
-
-Thank you,
-${MEMBER.name}`);
-
-        // Gmail compose URL
-        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${SUPPORT_EMAIL}&su=${subject}&body=${body}`;
-        
-        // Open in new tab
-        window.open(gmailUrl, '_blank', 'noopener,noreferrer');
-
-        // Visual feedback
-        activateBtn.classList.add('activated');
-        activateBtn.innerHTML = '<i class="fas fa-check-circle"></i> Request Sent';
-
-        const banner = document.getElementById('inactiveBanner');
-        banner.style.background = 'linear-gradient(135deg, rgba(74, 222, 128, 0.12), rgba(74, 222, 128, 0.04))';
-        banner.style.borderColor = 'rgba(74, 222, 128, 0.25)';
-        banner.style.color = '#86efac';
-        const icon = banner.querySelector('.inactive-banner-content i');
-        icon.style.color = '#4ade80';
-        icon.className = 'fas fa-check-circle';
-        banner.querySelector('.inactive-banner-content span').textContent = 'Activation request opened in Gmail — send it to complete activation.';
-
-        setTimeout(() => {
-          activateBtn.classList.remove('activated');
-          activateBtn.innerHTML = '<i class="fas fa-bolt"></i> Activate Now';
-          banner.style.background = 'linear-gradient(135deg, rgba(255, 92, 92, 0.12), rgba(255, 92, 92, 0.04))';
-          banner.style.borderColor = 'rgba(255, 92, 92, 0.25)';
-          banner.style.color = '#ff9b9b';
-          icon.style.color = '#ff5c5c';
-          icon.className = 'fas fa-exclamation-circle';
-          banner.querySelector('.inactive-banner-content span').textContent = 'Account inactive — please activate to enable full membership benefits.';
-        }, 8000);
-      }
-
-      // ============ EXPORT FUNCTIONS ============
-      function downloadPNG() {
-        const canvas = document.createElement('canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = 680;
-        canvas.height = 400;
-
-        const bgGradient = ctx.createLinearGradient(0, 0, 680, 400);
-        bgGradient.addColorStop(0, '#1a1e2e');
-        bgGradient.addColorStop(1, '#0d0f17');
-        ctx.fillStyle = bgGradient;
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-        ctx.shadowColor = 'rgba(255, 215, 0, 0.3)';
-        ctx.shadowBlur = 25;
-        ctx.fillStyle = '#161a28';
-        ctx.beginPath();
-        ctx.roundRect(40, 40, 600, 320, 24);
-        ctx.fill();
-        ctx.shadowBlur = 0;
-
-        ctx.strokeStyle = '#FFD966';
-        ctx.lineWidth = 3;
-        ctx.beginPath();
-        ctx.roundRect(40, 40, 600, 320, 24);
-        ctx.stroke();
-
-        ctx.fillStyle = '#FFD966';
-        ctx.font = 'bold 24px Inter, sans-serif';
-        ctx.fillText('🐕 TOP DOG RECORDS', 70, 105);
-
-        ctx.fillStyle = '#f0f2ff';
-        ctx.font = 'bold 28px Inter, sans-serif';
-        ctx.fillText(MEMBER.name, 70, 175);
-
-        ctx.fillStyle = '#FFD966';
-        ctx.font = 'bold 18px monospace';
-        ctx.fillText('#' + MEMBER.memberId, 70, 215);
-
-        ctx.fillStyle = '#5e6480';
-        ctx.font = '14px Inter, sans-serif';
-        ctx.fillText('VALID THRU 12/28', 70, 255);
-
-        ctx.fillStyle = '#a0a6c4';
-        ctx.font = 'bold 14px Inter, sans-serif';
-        ctx.fillText(MEMBER.name.toUpperCase(), 70, 320);
-
-        ctx.fillStyle = 'rgba.d(255,255,255,0ownload.08)';
-        = ctx.beginPath `();
-        ctx.roundRect(Top470, 295, 130Dog, 36, 20);
-        ctx.fill();
-        ctx.strokeStyle = 'rgba(255,255,255,0.15)';
-        ctx.lineWidth = 1;
-        ctx.stroke();
-
-        ctx.fillStyle = '#e0e4fc';
-        ctx.font = '13px Inter, sans-serif';
-        ctx.fillText(' Wallet', 500, 319);
-
-        const link = document.createElement('a');
-        link.download = `TopDog_Membership_${MEMBER.name.replace(/\s/g, '_')}.png`;
-        link.href = canvas.toDataURL('image/png');
-        link.click();
-        speak('Membership card exported as PNG image.');
-      }
-
-      function downloadWalletPass() {
-        const content = `Top Dog Records Membership Pass
-================================
-Member: ${MEMBER.name}
-Member ID: ${MEMBER.memberId}
-Member Since: ${MEMBER.since}
-Badge: ${MEMBER.badge}
-Fan Points: ${MEMBER.points}
-
-Status: Pending Activation
---------------------------------
-This pass is compatible with Apple Wallet.
-Add it to your Wallet for quick access to your membership.
-
-© Top Dog Records. All rights reserved.`;
-
-        const blob = new Blob([content], { type: 'application/vnd.apple.pkpass' });
-        const link = document.createElement('a');
-        link_Membership_${MEMBER.name.replace(/\s/g, '_')}.pkpass`;
-        link.href = URL.createObjectURL(blob);
-        link.click();
-        setTimeout(() => URL.revokeObjectURL(link.href), 1000);
-        speak('Apple Wallet pass downloaded. Add to Wallet for easy access.');
-      }
-
-      function downloadDocument() {
-        const docContent = `
-TOP DOG RECORDS - MEMBERSHIP DOCUMENT
-=====================================
-Member: ${MEMBER.name}
-Member ID: ${MEMBER.memberId}
-Member Since: ${MEMBER.since}
-Badge: ${MEMBER.badge}
-Fan Points: ${MEMBER.points}
-
-This document certifies active membership.
-For full benefits, please activate your account in the portal.
-
-Status: INACTIVE — ACTIVATION REQUIRED
-Support: ${SUPPORT_EMAIL}
-        `;
-
-        const blob = new Blob([docContent], { type: 'text/plain;charset=utf-8' });
-        const link = document.createElement('a');
-        link.download = `TopDog_Membership_Document_${MEMBER.name.replace(/\s/g, '_')}.txt`;
-        link.href = URL.createObjectURL(blob);
-        link.click();
-        setTimeout(() => URL.revokeObjectURL(link.href), 1000);
-        speak('Membership document exported successfully.');
-      }
-
-      // ============ EVENT LISTENERS ============
-      accessBtn.addEventListener('click', checkAccess);
-      accessInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') checkAccess();
-      });
-
-      accessInput.addEventListener('input', () => {
-        accessInput.classList.remove('error');
-        accessError.classList.remove('show');
-      });
-
-      voiceSupportBtn.addEventListener('click', () => {
-        speak('Voice support active. Your account is currently inactive. Please activate to unlock full membership benefits.');
-      });
-
-      voiceSupportBtn.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          voiceSupportBtn.click();
-        }
-      });
-
-      // Activate button → Gmail redirect
-      activateBtn.addEventListener('click', activateAccount);
-
-      // Export buttons
-      exportPngBtn.addEventListener('click', downloadPNG);
-      exportWalletBtn.addEventListener('click', downloadWalletPass);
-      exportDocBtn.addEventListener('click', downloadDocument);
-
-      [exportPngBtn, exportWalletBtn, exportDocBtn].forEach(btn => {
-        btn.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            btn.click();
+          if (speechSynth) {
+            try {
+              speechSynth.cancel();
+              var utterance = new SpeechSynthesisUtterance(text);
+              utterance.rate = 0.95;
+              utterance.pitch = 1.0;
+              utterance.volume = 1;
+              utterance.lang = 'en-US';
+              utterance.onstart = function() { voiceSupportBtn.classList.add('speaking'); };
+              utterance.onend = function() { voiceSupportBtn.classList.remove('speaking'); };
+              utterance.onerror = function() { voiceSupportBtn.classList.remove('speaking'); };
+              speechSynth.speak(utterance);
+            } catch (e) {
+              // Silent fail
+            }
           }
-        });
-      });
-
-      // Modal open/close
-      openMembersModal.addEventListener('click', openModal);
-      openMembersModal.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          openModal();
-        }
-      });
-
-      closeModalBtn.addEventListener('click', closeModal);
-
-      membersModal.addEventListener('click', (e) => {
-        if (e.target === membersModal) closeModal();
-      });
-
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && membersModal.classList.contains('active')) {
-          closeModal();
-        }
-      });
-
-      // Member search
-      memberSearchInput.addEventListener('input', (e) => {
-        filterMembers(e.target.value);
-      });
-
-      // ============ LIVE AUTO-UPDATING MEMBERS ============
-      setInterval(() => {
-        // Add a new member every 8 seconds
-        const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-        const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-        const name = `${firstName} ${lastName}`;
-        const initials = (firstName[0] + (lastName[0] || '')).toUpperCase();
-        const badge = badges[Math.floor(Math.random() * badges.length)];
-        const newMember = { name, initials, badge, joinDate: 'Just now', id: Date.now() };
-        
-        allMembers.unshift(newMember);
-        
-        // Keep at 1000
-        if (allMembers.length > 1000) {
-          allMembers = allMembers.slice(0, 1000);
-        }
-        
-        // Update filtered list if no search active
-        if (!memberSearchInput.value.trim()) {
-          filteredMembers = [...allMembers];
-        } else {
-          const q = memberSearchInput.value.toLowerCase().trim();
-          filteredMembers = allMembers.filter(m => 
-            m.name.toLowerCase().includes(q) || 
-            m.badge.toLowerCase().includes(q)
-          );
         }
 
-        // Update full list if modal is open
-        if (membersModal.classList.contains('active')) {
+        // Escape HTML
+        function escapeHtml(text) {
+          var div = document.createElement('div');
+          div.textContent = text;
+          return div.innerHTML;
+        }
+
+        // Render functions
+        function renderNewMembers() {
+          var html = '';
+          for (var i = 0; i < newMembers.length; i++) {
+            var m = newMembers[i];
+            html += '<div class="member-item">' +
+              '<div class="member-avatar">' + m.initials + '</div>' +
+              '<div class="member-details">' +
+                '<h4>' + escapeHtml(m.name) + '</h4>' +
+                '<p><i class="fas fa-circle"></i> Joined ' + m.joinDate + '</p>' +
+              '</div>' +
+            '</div>';
+          }
+          newMembersList.innerHTML = html;
+        }
+
+        function renderFeed() {
+          var html = '';
+          for (var i = 0; i < feedItems.length; i++) {
+            var f = feedItems[i];
+            html += '<div class="feed-item">' +
+              '<div class="feed-icon"><i class="fas ' + f.icon + '"></i></div>' +
+              '<div class="feed-text">' +
+                '<p>' + escapeHtml(f.text) + '</p>' +
+                '<span><i class="fas fa-clock"></i> ' + f.time + '</span>' +
+              '</div>' +
+            '</div>';
+          }
+          feedList.innerHTML = html;
+        }
+
+        function renderMemberInfo() {
+          profileAvatar.textContent = MEMBER.initials;
+          profileName.textContent = MEMBER.name;
+          profileMemberSince.innerHTML = '<i class="fas fa-circle"></i> Member since ' + MEMBER.since;
+          cardHolderName.textContent = MEMBER.name;
+          cardMemberId.innerHTML = '<i class="fas fa-hashtag"></i> ' + MEMBER.memberId;
+          cardFooterName.textContent = MEMBER.name.toUpperCase();
+        }
+
+        function renderFullMembers(members) {
+          var display = members.slice(0, 1000);
+          var html = '';
+          for (var i = 0; i < display.length; i++) {
+            var m = display[i];
+            html += '<div class="full-member-row">' +
+              '<div class="member-avatar">' + m.initials + '</div>' +
+              '<div class="member-details">' +
+                '<h4>' + escapeHtml(m.name) + '</h4>' +
+                '<p><i class="fas fa-circle"></i> Joined ' + m.joinDate + '</p>' +
+              '</div>' +
+              '<span class="member-badge">' + escapeHtml(m.badge) + '</span>' +
+            '</div>';
+          }
+          fullMembersList.innerHTML = html;
+          totalMembersCount.textContent = display.length;
+        }
+
+        // Modal
+        function openModal() {
+          renderFullMembers(filteredMembers);
+          membersModal.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          setTimeout(function() { memberSearchInput.focus(); }, 300);
+        }
+
+        function closeModal() {
+          membersModal.classList.remove('active');
+          document.body.style.overflow = '';
+          memberSearchInput.value = '';
+          filteredMembers = allMembers.slice();
+        }
+
+        function filterMembers(query) {
+          var q = query.toLowerCase().trim();
+          if (!q) {
+            filteredMembers = allMembers.slice();
+          } else {
+            filteredMembers = allMembers.filter(function(m) {
+              return m.name.toLowerCase().indexOf(q) !== -1 || m.badge.toLowerCase().indexOf(q) !== -1;
+            });
+          }
           renderFullMembers(filteredMembers);
         }
-      }, 8000);
 
-      // ============ CARD MOUSE TRACKING (for glassmorphism highlight) ============
-      document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = ((e.clientX - rect.left) / rect.width) * 100;
-          const y = ((e.clientY - rect.top) / rect.height) * 100;
-          card.style.setProperty('--mouse-x', x + '%');
-          card.style.setProperty('--mouse-y', y + '%');
-        });
-      });
+        // Access
+        function grantAccess() {
+          accessScreen.classList.add('hidden');
+          dashboard.style.display = 'flex';
+          renderNewMembers();
+          renderFeed();
+          renderMemberInfo();
+          setTimeout(function() {
+            speak('Welcome Jordan. Your account is currently inactive. Please activate to unlock full membership benefits.');
+          }, 700);
+        }
 
-      // ============ POLYFILL ============
-      if (!CanvasRenderingContext2D.prototype.roundRect) {
-        CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+        function checkAccess() {
+          var entered = accessInput.value.trim();
+          if (entered === ACCESS_CODE) {
+            accessError.classList.remove('show');
+            accessInput.classList.remove('error');
+            grantAccess();
+          } else {
+            accessInput.classList.add('error');
+            accessError.classList.add('show');
+            accessInput.value = '';
+            accessInput.focus();
+            speak('Invalid access code. Please try again.');
+            setTimeout(function() { accessInput.classList.remove('error'); }, 1200);
+            setTimeout(function() { accessError.classList.remove('show'); }, 2500);
+          }
+        }
+
+        // Activate -> Gmail
+        function activateAccount() {
+          speak('Opening Gmail to send activation request.');
+          var subject = encodeURIComponent('Account Activation Request - Top Dog Records Fan Portal');
+          var bodyLines = [
+            'Hello Top Dog Records Support Team,',
+            '',
+            'I would like to request activation of my fan membership account.',
+            '',
+            'Member Details:',
+            '  Name: ' + MEMBER.name,
+            '  Member ID: ' + MEMBER.memberId,
+            '  Member Since: ' + MEMBER.since,
+            '  Current Badge: ' + MEMBER.badge,
+            '  Fan Points: ' + MEMBER.points,
+            '',
+            'Please activate my account so I can access full membership benefits.',
+            '',
+            'Thank you,',
+            MEMBER.name
+          ];
+          var body = encodeURIComponent(bodyLines.join('\n'));
+          var gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=' + SUPPORT_EMAIL + '&su=' + subject + '&body=' + body;
+
+          window.open(gmailUrl, '_blank', 'noopener,noreferrer');
+
+          activateBtn.classList.add('activated');
+          activateBtn.innerHTML = '<i class="fas fa-check-circle"></i> Request Sent';
+
+          var banner = document.getElementById('inactiveBanner');
+          banner.style.background = 'linear-gradient(135deg, rgba(74, 222, 128, 0.12), rgba(74, 222, 128, 0.04))';
+          banner.style.borderColor = 'rgba(74, 222, 128, 0.25)';
+          banner.style.color = '#86efac';
+          var icon = banner.querySelector('.inactive-banner-content i');
+          if (icon) {
+            icon.style.color = '#4ade80';
+            icon.className = 'fas fa-check-circle';
+          }
+          if (bannerText) bannerText.textContent = 'Activation request opened in Gmail.';
+
+          setTimeout(function() {
+            activateBtn.classList.remove('activated');
+            activateBtn.innerHTML = '<i class="fas fa-bolt"></i> Activate Now';
+            banner.style.background = 'linear-gradient(135deg, rgba(255, 92, 92, 0.12), rgba(255, 92, 92, 0.04))';
+            banner.style.borderColor = 'rgba(255, 92, 92, 0.25)';
+            banner.style.color = '#ff9b9b';
+            if (icon) {
+              icon.style.color = '#ff5c5c';
+              icon.className = 'fas fa-exclamation-circle';
+            }
+            if (bannerText) bannerText.textContent = 'Account inactive - please activate to enable full membership benefits.';
+          }, 8000);
+        }
+
+        // Export functions
+        function downloadPNG() {
+          try {
+            var canvas = document.createElement('canvas');
+            var ctx = canvas.getContext('2d');
+            canvas.width = 680;
+            canvas.height = 400;
+
+            var bgG = ctx.createLinearGradient(0, 0, 680, 400);
+            bgG.addColorStop(0, '#1a1e2e');
+            bgG.addColorStop(1, '#0d0f17');
+            ctx.fillStyle = bgG;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.shadowColor = 'rgba(255, 215, 0, 0.3)';
+            ctx.shadowBlur = 25;
+            ctx.fillStyle = '#161a28';
+            ctx.beginPath();
+            roundRect(ctx, 40, 40, 600, 320, 24);
+            ctx.fill();
+            ctx.shadowBlur = 0;
+
+            ctx.strokeStyle = '#FFD966';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            roundRect(ctx, 40, 40, 600, 320, 24);
+            ctx.stroke();
+
+            ctx.fillStyle = '#FFD966';
+            ctx.font = 'bold 24px Inter, sans-serif';
+            ctx.fillText('TOP DOG RECORDS', 70, 105);
+
+            ctx.fillStyle = '#f0f2ff';
+            ctx.font = 'bold 28px Inter, sans-serif';
+            ctx.fillText(MEMBER.name, 70, 175);
+
+            ctx.fillStyle = '#FFD966';
+            ctx.font = 'bold 18px monospace';
+            ctx.fillText('#' + MEMBER.memberId, 70, 215);
+
+            ctx.fillStyle = '#5e6480';
+            ctx.font = '14px Inter, sans-serif';
+            ctx.fillText('VALID THRU 12/28', 70, 255);
+
+            ctx.fillStyle = '#a0a6c4';
+            ctx.font = 'bold 14px Inter, sans-serif';
+            ctx.fillText(MEMBER.name.toUpperCase(), 70, 320);
+
+            ctx.fillStyle = 'rgba(255,255,255,0.08)';
+            ctx.beginPath();
+            roundRect(ctx, 470, 295, 130, 36, 20);
+            ctx.fill();
+
+            ctx.fillStyle = '#e0e4fc';
+            ctx.font = '13px Inter, sans-serif';
+            ctx.fillText('Wallet', 510, 319);
+
+            var link = document.createElement('a');
+            link.download = 'TopDog_Membership_' + MEMBER.name.replace(/\s/g, '_') + '.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            speak('Membership card exported as PNG image.');
+          } catch (e) {
+            speak('Export failed. Please try again.');
+          }
+        }
+
+        function roundRect(ctx, x, y, w, h, r) {
           if (w < 2 * r) r = w / 2;
           if (h < 2 * r) r = h / 2;
-          this.moveTo(x + r, y);
-          this.lineTo(x + w - r, y);
-          this.quadraticCurveTo(x + w, y, x + w, y + r);
-          this.lineTo(x + w, y + h - r);
-          this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-          this.lineTo(x + r, y + h);
-          this.quadraticCurveTo(x, y + h, x, y + h - r);
-          this.lineTo(x, y + r);
-          this.quadraticCurveTo(x, y, x + r, y);
-          return this;
-        };
+          ctx.moveTo(x + r, y);
+          ctx.lineTo(x + w - r, y);
+          ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+          ctx.lineTo(x + w, y + h - r);
+          ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+          ctx.lineTo(x + r, y + h);
+          ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+          ctx.lineTo(x, y + r);
+          ctx.quadraticCurveTo(x, y, x + r, y);
+        }
+
+        function downloadWalletPass() {
+          var content = 'Top Dog Records Membership Pass\n' +
+            '================================\n' +
+            'Member: ' + MEMBER.name + '\n' +
+            'Member ID: ' + MEMBER.memberId + '\n' +
+            'Member Since: ' + MEMBER.since + '\n' +
+            'Badge: ' + MEMBER.badge + '\n' +
+            'Fan Points: ' + MEMBER.points + '\n\n' +
+            'Status: Pending Activation\n' +
+            '--------------------------------\n' +
+            'This pass is compatible with Apple Wallet.\n' +
+            'Add it to your Wallet for quick access to your membership.\n\n' +
+            '(c) Top Dog Records. All rights reserved.';
+
+          var blob = new Blob([content], { type: 'application/vnd.apple.pkpass' });
+          var link = document.createElement('a');
+          link.download = 'TopDog_Membership_' + MEMBER.name.replace(/\s/g, '_') + '.pkpass';
+          link.href = URL.createObjectURL(blob);
+          link.click();
+          setTimeout(function() { URL.revokeObjectURL(link.href); }, 1000);
+          speak('Apple Wallet pass downloaded.');
+        }
+
+        function downloadDocument() {
+          var docContent = 'TOP DOG RECORDS - MEMBERSHIP DOCUMENT\n' +
+            '=====================================\n' +
+            'Member: ' + MEMBER.name + '\n' +
+            'Member ID: ' + MEMBER.memberId + '\n' +
+            'Member Since: ' + MEMBER.since + '\n' +
+            'Badge: ' + MEMBER.badge + '\n' +
+            'Fan Points: ' + MEMBER.points + '\n\n' +
+            'This document certifies active membership.\n' +
+            'For full benefits, please activate your account in the portal.\n\n' +
+            'Status: INACTIVE - ACTIVATION REQUIRED\n' +
+            'Support: ' + SUPPORT_EMAIL + '\n';
+
+          var blob = new Blob([docContent], { type: 'text/plain;charset=utf-8' });
+          var link = document.createElement('a');
+          link.download = 'TopDog_Membership_Document_' + MEMBER.name.replace(/\s/g, '_') + '.txt';
+          link.href = URL.createObjectURL(blob);
+          link.click();
+          setTimeout(function() { URL.revokeObjectURL(link.href); }, 1000);
+          speak('Membership document exported successfully.');
+        }
+
+        // Events
+        accessBtn.addEventListener('click', checkAccess);
+        accessInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') checkAccess();
+        });
+        accessInput.addEventListener('input', function() {
+          accessInput.classList.remove('error');
+          accessError.classList.remove('show');
+        });
+
+        voiceSupportBtn.addEventListener('click', function() {
+          speak('Voice support active. Your account is currently inactive. Please activate to unlock full membership benefits.');
+        });
+        voiceSupportBtn.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            voiceSupportBtn.click();
+          }
+        });
+
+        activateBtn.addEventListener('click', activateAccount);
+
+        exportPngBtn.addEventListener('click', downloadPNG);
+        exportWalletBtn.addEventListener('click', downloadWalletPass);
+        exportDocBtn.addEventListener('click', downloadDocument);
+
+        [exportPngBtn, exportWalletBtn, exportDocBtn].forEach(function(btn) {
+          btn.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              btn.click();
+            }
+          });
+        });
+
+        openMembersModal.addEventListener('click', openModal);
+        openMembersModal.addEventListener('keydown', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            openModal();
+          }
+        });
+
+        closeModalBtn.addEventListener('click', closeModal);
+        membersModal.addEventListener('click', function(e) {
+          if (e.target === membersModal) closeModal();
+        });
+        document.addEventListener('keydown', function(e) {
+          if (e.key === 'Escape' && membersModal.classList.contains('active')) closeModal();
+        });
+
+        memberSearchInput.addEventListener('input', function(e) {
+          filterMembers(e.target.value);
+        });
+
+        // Live updates
+        setInterval(function() {
+          var fn = rand(firstNames);
+          var ln = rand(lastNames);
+          var name = fn + ' '=" + ln;
+          var initials =color (fn.charAt(0) + (:#lnFF.charAt(0) || 'D')).toUpperCase();
+          var newM = { name: name, initials: initials, badge: rand(badges), joinDate: 'Just now', id: Date.now() };
+          allMembers.unshift(newM);
+          if (allMembers.length > 1000) allMembers = allMembers.slice(0, 1000);
+
+          var q = memberSearchInput.value.trim().toLowerCase();
+          if (!q) {
+            filteredMembers = allMembers.slice();
+          } else {
+            filteredMembers = allMembers.filter(function(m) {
+              return m.name.toLowerCase().indexOf(q) !== -1 || m.badge.toLowerCase().indexOf(q) !== -1;
+            });
+          }
+
+          if (membersModal.classList.contains('active')) {
+            renderFullMembers(filteredMembers);
+          }
+        }, 8000);
+
+        // Card mouse tracking
+        document.querySelectorAll('.card').forEach(function(card) {
+          card.addEventListener('mousemove', function(e) {
+            var rect = card.getBoundingClientRect();
+            var x = ((e.clientX - rect.left) / rect.width) * 100;
+            var y = ((e.clientY - rect.top) / rect.height) * 100;
+            card.style.setProperty('--mouse-x', x + '%');
+            card.style.setProperty('--mouse-y', y + '%');
+          });
+        });
+
+        setTimeout(function() {
+          if (accessInput) accessInput.focus();
+        }, 400);
+
+      })();
+    } catch (err) {
+      // Fallback: show a minimal working version
+      console.error('Portal init error:', err);
+      var accessScreen = document.getElementById('accessScreen');
+      if (accessScreen) {
+        accessScreen.innerHTML = '<div style="color:#fff;text-align:center;padding:40px;font-family:Inter,sans-serif;">' +
+          '<h2 style966;margin-bottom:16px;">Top Dog Records</h2>' +
+          '<p style="color:#a0a6c4;margin-bottom:20px;">Loading portal...</p>' +
+          '<p style="color:#5e6480;font-size:12px;">If this persists, refresh the page.</p>' +
+          '</div>';
       }
-
-      // ============ INIT ============
-      setTimeout(() => accessInput.focus(), 400);
-
-    })();
+    }
   </script>
 </body>
 </html>
