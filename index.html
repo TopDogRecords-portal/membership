@@ -4,52 +4,92 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Top Dog Records · Fan Portal</title>
-  <!-- Font Awesome 6 (Free) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
+    :root {
+      --gold: #FFD966;
+      --gold-deep: #E6B422;
+      --gold-glow: rgba(255, 215, 0, 0.35);
+      --bg-dark: #0a0c14;
+      --bg-card: #141724;
+      --bg-elevated: #1c1f30;
+      --border-subtle: rgba(255, 215, 0, 0.12);
+      --border-medium: rgba(255, 215, 0, 0.25);
+      --text-primary: #f0f2ff;
+      --text-secondary: #a0a6c4;
+      --text-muted: #5e6480;
+      --danger: #ff5c5c;
+      --danger-glow: rgba(255, 92, 92, 0.3);
+      --success: #4ade80;
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 16px;
+      --radius-sm: 12px;
+      --transition-smooth: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
     }
 
     body {
-      background: #0b0d15;
+      background: var(--bg-dark);
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 16px;
-    }
-
-    /* main app container – fixed width, realistic */
-    .app-container {
-      max-width: 1280px;
-      width: 100%;
-      background: #11131f;
-      border-radius: 40px;
-      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 215, 0, 0.1) inset;
-      overflow: hidden;
-      backdrop-filter: blur(4px);
+      padding: 20px;
+      background-image: 
+        radial-gradient(ellipse at 15% 10%, rgba(255, 215, 0, 0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 90%, rgba(100, 80, 255, 0.05) 0%, transparent 55%);
+      background-attachment: fixed;
       position: relative;
+      overflow-x: hidden;
     }
 
-    /* Access screen overlay */
+    /* Ambient noise overlay for depth */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .app-container {
+      max-width: 1340px;
+      width: 100%;
+      background: linear-gradient(165deg, #141724 0%, #0e1019 100%);
+      border-radius: var(--radius-xl);
+      box-shadow: 
+        0 40px 80px -20px rgba(0, 0, 0, 0.9),
+        0 0 0 1px rgba(255, 215, 0, 0.08) inset,
+        0 1px 0 0 rgba(255, 255, 255, 0.04) inset;
+      overflow: hidden;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============ ACCESS SCREEN ============ */
     .access-screen {
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: radial-gradient(circle at 30% 20%, #1a1e2f, #0a0c14);
+      inset: 0;
+      background: radial-gradient(circle at 35% 25%, #1a1e30, #080a11 80%);
       z-index: 100;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: opacity 0.4s ease, visibility 0.4s;
-      backdrop-filter: blur(10px);
-      border-radius: 40px;
+      padding: 24px;
+      transition: opacity 0.5s var(--transition-smooth), visibility 0.5s;
+      border-radius: var(--radius-xl);
     }
 
     .access-screen.hidden {
@@ -59,150 +99,312 @@
     }
 
     .access-card {
-      background: rgba(20, 22, 36, 0.9);
-      border-radius: 48px;
-      padding: 48px 40px;
+      background: rgba(20, 23, 36, 0.75);
+      border-radius: 40px;
+      padding: 52px 44px 44px;
       width: 100%;
-      max-width: 440px;
-      box-shadow: 0 25px 40px -10px rgba(0,0,0,0.8), 0 0 0 1px rgba(255, 215, 0, 0.2);
+      max-width: 460px;
+      box-shadow: 
+        0 30px 60px -15px rgba(0, 0, 0, 0.9),
+        0 0 0 1px rgba(255, 215, 0, 0.15),
+        0 1px 0 0 rgba(255, 255, 255, 0.06) inset;
       text-align: center;
-      backdrop-filter: blur(8px);
-      border: 1px solid rgba(255, 215, 0, 0.2);
+      backdrop-filter: blur(24px) saturate(1.4);
+      -webkit-backdrop-filter: blur(24px) saturate(1.4);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Decorative glow orbs */
+    .access-card::before {
+      content: '';
+      position: absolute;
+      top: -60%;
+      left: -20%;
+      width: 140%;
+      height: 80%;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .access-logo {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 20px;
+      background: linear-gradient(145deg, #232838, #141724);
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-medium);
+      box-shadow: 0 8px 20px -6px rgba(0,0,0,0.6), 0 0 30px -8px var(--gold-glow);
+      position: relative;
+    }
+
+    .access-logo i {
+      font-size: 34px;
+      color: var(--gold);
+      filter: drop-shadow(0 0 12px var(--gold-glow));
     }
 
     .access-card h1 {
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: -0.5px;
-      background: linear-gradient(135deg, #FFD966, #FFB347);
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.6px;
+      background: linear-gradient(135deg, #FFE599, #FFD966 40%, #E6B422);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
+      position: relative;
     }
 
-    .access-card p {
-      color: #a0a4c0;
+    .access-subtitle {
+      color: var(--text-secondary);
       font-size: 15px;
-      margin-bottom: 32px;
       font-weight: 400;
+      margin-bottom: 36px;
+      letter-spacing: 0.2px;
+      position: relative;
     }
 
     .access-input-group {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
+      position: relative;
+    }
+
+    .access-input-wrapper {
+      position: relative;
+    }
+
+    .access-input-wrapper i {
+      position: absolute;
+      left: 22px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 16px;
+      transition: color 0.25s;
+      pointer-events: none;
     }
 
     .access-input-group input {
-      background: #1e2233;
-      border: 1.5px solid #2e3348;
+      background: rgba(10, 12, 20, 0.7);
+      border: 1.5px solid #2a2f44;
       border-radius: 60px;
-      padding: 18px 24px;
-      font-size: 18px;
-      font-weight: 500;
-      color: #f0f2ff;
-      text-align: center;
-      letter-spacing: 4px;
-      transition: 0.2s;
+      padding: 19px 24px 19px 52px;
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-align: left;
+      letter-spacing: 3px;
+      transition: all 0.25s var(--transition-smooth);
       outline: none;
+      width: 100%;
+      font-family: 'Inter', monospace;
     }
 
     .access-input-group input:focus {
-      border-color: #FFD966;
-      box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.15);
+      border-color: var(--gold);
+      box-shadow: 0 0 0 4px var(--gold-glow), 0 0 30px -8px var(--gold-glow);
+      background: rgba(10, 12, 20, 0.9);
+    }
+
+    .access-input-group input:focus + i,
+    .access-input-wrapper:focus-within i {
+      color: var(--gold);
     }
 
     .access-input-group input::placeholder {
-      color: #4a4f6a;
+      color: #414659;
       letter-spacing: 1px;
       font-weight: 400;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    .access-input-group input.error {
+      border-color: var(--danger);
+      box-shadow: 0 0 0 4px var(--danger-glow);
+      animation: shake 0.4s var(--transition-smooth);
+    }
+
+    @keyframes shake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-8px); }
+      40% { transform: translateX(8px); }
+      60% { transform: translateX(-5px); }
+      80% { transform: translateX(5px); }
     }
 
     .access-input-group button {
-      background: linear-gradient(135deg, #FFD966, #e6b422);
+      background: linear-gradient(135deg, #FFE28C, #FFD966 30%, #E6B422);
       border: none;
       border-radius: 60px;
-      padding: 18px 24px;
-      font-size: 18px;
+      padding: 19px 24px;
+      font-size: 16px;
       font-weight: 700;
-      color: #0b0d15;
+      color: #0a0c14;
       cursor: pointer;
-      transition: all 0.2s;
-      box-shadow: 0 8px 20px -6px rgba(255, 215, 0, 0.3);
-      letter-spacing: 0.5px;
+      transition: all 0.25s var(--transition-smooth);
+      box-shadow: 0 10px 24px -8px rgba(255, 215, 0, 0.45);
+      letter-spacing: 0.3px;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 10px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .access-input-group button::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, transparent, rgba(255,255,255,0.35), transparent);
+      transform: translateX(-100%);
+      transition: transform 0.6s var(--transition-smooth);
+    }
+
+    .access-input-group button:hover::before {
+      transform: translateX(100%);
     }
 
     .access-input-group button:hover {
-      background: linear-gradient(135deg, #ffe28c, #f5c542);
-      transform: scale(1.01);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 28px -8px rgba(255, 215, 0, 0.55);
+    }
+
+    .access-input-group button:active {
+      transform: translateY(0);
     }
 
     .access-hint {
-      margin-top: 24px;
-      font-size: 13px;
-      color: #5e6480;
+      margin-top: 26px;
+      font-size: 12.5px;
+      color: var(--text-muted);
+      letter-spacing: 0.4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
     }
 
-    /* main dashboard */
+    .access-hint i {
+      font-size: 11px;
+    }
+
+    .access-error-msg {
+      color: var(--danger);
+      font-size: 13px;
+      font-weight: 500;
+      margin-top: 4px;
+      min-height: 18px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .access-error-msg.show {
+      opacity: 1;
+    }
+
+    /* ============ DASHBOARD ============ */
     .dashboard {
       display: flex;
       flex-direction: column;
-      padding: 32px 32px 40px;
-      background: linear-gradient(145deg, #11131f 0%, #0b0d15 100%);
-      min-height: 700px;
+      padding: 28px 32px 36px;
+      min-height: 720px;
+      animation: fadeInUp 0.6s var(--transition-smooth);
     }
 
-    /* inactive banner */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Inactive banner */
     .inactive-banner {
-      background: rgba(255, 75, 75, 0.12);
-      border: 1px solid rgba(255, 75, 75, 0.4);
+      background: linear-gradient(135deg, rgba(255, 92, 92, 0.1), rgba(255, 92, 92, 0.04));
+      border: 1px solid rgba(255, 92, 92, 0.25);
       border-radius: 60px;
-      padding: 14px 24px;
+      padding: 12px 14px 12px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 24px;
-      backdrop-filter: blur(4px);
-      color: #ff7b7b;
+      margin-bottom: 26px;
+      backdrop-filter: blur(10px);
+      color: #ff9b9b;
       font-weight: 500;
-      font-size: 15px;
-      letter-spacing: 0.3px;
+      font-size: 14.5px;
+      letter-spacing: 0.1px;
+      position: relative;
+      overflow: hidden;
     }
 
-    .inactive-banner i {
-      margin-right: 10px;
-      font-size: 18px;
+    .inactive-banner::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: var(--danger);
+      box-shadow: 0 0 16px var(--danger);
+    }
+
+    .inactive-banner-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .inactive-banner-content i {
+      font-size: 17px;
+      color: var(--danger);
+      filter: drop-shadow(0 0 6px var(--danger-glow));
     }
 
     .activate-btn {
-      background: #ff4b4b;
+      background: linear-gradient(135deg, #ff6b6b, #ff4757);
       border: none;
       border-radius: 40px;
-      padding: 8px 22px;
+      padding: 10px 24px;
       color: white;
       font-weight: 600;
-      font-size: 14px;
+      font-size: 13.5px;
       cursor: pointer;
-      transition: 0.2s;
-      box-shadow: 0 6px 12px -4px rgba(255, 75, 75, 0.3);
+      transition: all 0.25s var(--transition-smooth);
+      box-shadow: 0 8px 18px -6px rgba(255, 71, 87, 0.5);
       white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      letter-spacing: 0.2px;
     }
 
     .activate-btn:hover {
-      background: #ff6363;
+      transform: translateY(-1px);
+      box-shadow: 0 12px 22px -6px rgba(255, 71, 87, 0.6);
     }
 
-    /* header row */
+    .activate-btn:active {
+      transform: translateY(0);
+    }
+
+    .activate-btn.activated {
+      background: linear-gradient(135deg, #4ade80, #22c55e);
+      box-shadow: 0 8px 18px -6px rgba(74, 222, 128, 0.5);
+      pointer-events: none;
+    }
+
+    /* Top bar */
     .top-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 28px;
+      margin-bottom: 26px;
       flex-wrap: wrap;
       gap: 16px;
     }
@@ -210,73 +412,137 @@
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
-    .brand i {
-      font-size: 32px;
-      color: #FFD966;
-      text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    .brand-icon {
+      width: 46px;
+      height: 46px;
+      background: linear-gradient(145deg, #232838, #141724);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border-medium);
+      box-shadow: 0 0 24px -6px var(--gold-glow);
+    }
+
+    .brand-icon i {
+      font-size: 22px;
+      color: var(--gold);
+      filter: drop-shadow(0 0 8px var(--gold-glow));
     }
 
     .brand h2 {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 700;
-      letter-spacing: -0.3px;
-      color: white;
+      letter-spacing: -0.4px;
+      color: var(--text-primary);
     }
 
-    .brand span {
-      color: #FFD966;
-      font-weight: 300;
+    .brand h2 span {
+      color: var(--gold);
+      font-weight: 400;
     }
 
-    .voice-support {
-      background: #1e2233;
-      border-radius: 60px;
-      padding: 12px 22px;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      border: 1px solid #2e3348;
-      cursor: pointer;
-      transition: 0.2s;
-      color: #d0d4f0;
-      font-size: 15px;
+    .brand-tagline {
+      font-size: 11.5px;
+      color: var(--text-muted);
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-top: 2px;
       font-weight: 500;
     }
 
+    .voice-support {
+      background: rgba(28, 31, 48, 0.7);
+      border-radius: 60px;
+      padding: 11px 20px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border: 1px solid #2e3348;
+      cursor: pointer;
+      transition: all 0.25s var(--transition-smooth);
+      color: var(--text-secondary);
+      font-size: 14px;
+      font-weight: 500;
+      backdrop-filter: blur(8px);
+      user-select: none;
+    }
+
     .voice-support i {
-      color: #FFD966;
-      font-size: 20px;
+      color: var(--gold);
+      font-size: 17px;
+      transition: transform 0.25s;
     }
 
     .voice-support:hover {
-      background: #262b3f;
-      border-color: #FFD966;
+      background: rgba(38, 43, 64, 0.9);
+      border-color: var(--border-medium);
+      color: var(--text-primary);
     }
 
-    /* grid layout */
+    .voice-support:hover i {
+      transform: scale(1.15);
+    }
+
+    .voice-support.speaking i {
+      animation: pulseVoice 0.8s ease-in-out infinite;
+    }
+
+    @keyframes pulseVoice {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+
+    /* Grid */
     .dashboard-grid {
       display: grid;
-      grid-template-columns: 1.2fr 0.9fr 1fr;
-      gap: 22px;
+      grid-template-columns: 1.15fr 0.9fr 1.05fr;
+      gap: 20px;
       align-items: start;
     }
 
-    /* cards general */
+    /* Cards */
     .card {
-      background: rgba(22, 25, 38, 0.8);
-      border-radius: 32px;
-      padding: 24px;
-      border: 1px solid rgba(255, 215, 0, 0.1);
-      box-shadow: 0 15px 25px -10px rgba(0, 0, 0, 0.6);
-      backdrop-filter: blur(6px);
-      transition: border-color 0.2s;
+      background: rgba(22, 25, 38, 0.55);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      border: 1px solid var(--border-subtle);
+      box-shadow: 
+        0 18px 32px -16px rgba(0, 0, 0, 0.7),
+        0 1px 0 0 rgba(255, 255, 255, 0.03) inset;
+      backdrop-filter: blur(12px) saturate(1.2);
+      -webkit-backdrop-filter: blur(12px) saturate(1.2);
+      transition: border-color 0.3s var(--transition-smooth), transform 0.3s var(--transition-smooth), box-shadow 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 20px;
+      right: 20px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.2), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
     }
 
     .card:hover {
-      border-color: rgba(255, 215, 0, 0.3);
+      border-color: var(--border-medium);
+      transform: translateY(-2px);
+      box-shadow: 
+        0 24px 44px -18px rgba(0, 0, 0, 0.8),
+        0 0 40px -20px var(--gold-glow),
+        0 1px 0 0 rgba(255, 255, 255, 0.05) inset;
+    }
+
+    .card:hover::before {
+      opacity: 1;
     }
 
     .card-header {
@@ -287,128 +553,218 @@
     }
 
     .card-header h3 {
-      font-size: 18px;
+      font-size: 15.5px;
       font-weight: 600;
-      color: white;
-      letter-spacing: -0.2px;
+      color: var(--text-primary);
+      letter-spacing: -0.1px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
-    .card-header i {
-      color: #FFD966;
-      font-size: 20px;
+    .card-header h3 i {
+      color: var(--gold);
+      font-size: 15px;
     }
 
-    /* new members info */
+    .card-header .header-action {
+      color: var(--text-muted);
+      font-size: 14px;
+      cursor: pointer;
+      transition: color 0.2s;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+    }
+
+    .card-header .header-action:hover {
+      color: var(--gold);
+      background: rgba(255, 215, 0, 0.08);
+    }
+
+    /* New members list */
     .new-members-list {
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 6px;
     }
 
     .member-item {
       display: flex;
       align-items: center;
       gap: 14px;
+      padding: 10px 12px;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    .member-item:hover {
+      background: rgba(255, 215, 0, 0.04);
     }
 
     .member-avatar {
-      width: 44px;
-      height: 44px;
-      border-radius: 40px;
-      background: linear-gradient(135deg, #2e3348, #1b1f30);
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(145deg, #2e3348, #1b1f30);
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      color: #FFD966;
-      font-size: 18px;
-      border: 1px solid rgba(255, 215, 0, 0.3);
+      color: var(--gold);
+      font-size: 15px;
+      border: 1px solid var(--border-subtle);
+      flex-shrink: 0;
+      letter-spacing: 0.5px;
+      transition: border-color 0.2s;
+    }
+
+    .member-item:hover .member-avatar {
+      border-color: var(--border-medium);
     }
 
     .member-details h4 {
-      font-size: 15px;
+      font-size: 14.5px;
       font-weight: 600;
-      color: #f0f2ff;
+      color: var(--text-primary);
+      letter-spacing: -0.1px;
     }
 
     .member-details p {
       font-size: 12px;
-      color: #7e849e;
+      color: var(--text-muted);
       margin-top: 2px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
     }
 
-    /* contents / feed */
+    .member-details p i {
+      font-size: 9px;
+      color: var(--success);
+    }
+
+    /* Feed */
     .feed-item {
       display: flex;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid #252a3c;
+      gap: 14px;
+      padding: 12px 10px;
+      border-radius: var(--radius-sm);
+      transition: background 0.2s;
+      cursor: pointer;
     }
 
-    .feed-item:last-child {
-      border-bottom: none;
+    .feed-item:hover {
+      background: rgba(255, 215, 0, 0.04);
     }
 
     .feed-icon {
-      color: #FFD966;
-      font-size: 18px;
-      margin-top: 3px;
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: rgba(255, 215, 0, 0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold);
+      font-size: 14px;
+      flex-shrink: 0;
+      border: 1px solid var(--border-subtle);
     }
 
     .feed-text p {
-      font-size: 14px;
+      font-size: 13.5px;
       color: #cdd1e6;
-      line-height: 1.4;
+      line-height: 1.45;
+      font-weight: 450;
     }
 
     .feed-text span {
       font-size: 11px;
-      color: #5e6480;
-      display: block;
-      margin-top: 4px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 5px;
+    }
+
+    .feed-text span i {
+      font-size: 9px;
     }
 
     /* Badge & points */
     .badge-points {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      margin-bottom: 16px;
+      gap: 10px;
+      margin-bottom: 18px;
     }
 
     .badge-icon {
-      background: linear-gradient(145deg, #2b2f44, #1b1f30);
+      flex: 1;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(255, 215, 0, 0.03));
       border-radius: 100px;
-      padding: 10px 20px;
+      padding: 10px 16px;
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 8px;
-      border: 1px solid rgba(255, 215, 0, 0.3);
+      border: 1px solid var(--border-medium);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .badge-icon::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.08), transparent);
+      transform: translateX(-100%);
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      60%, 100% { transform: translateX(100%); }
     }
 
     .badge-icon i {
-      color: #FFD966;
-      font-size: 22px;
+      color: var(--gold);
+      font-size: 18px;
+      filter: drop-shadow(0 0 6px var(--gold-glow));
     }
 
     .badge-icon span {
-      font-weight: 600;
-      color: #FFD966;
+      font-weight: 700;
+      color: var(--gold);
+      font-size: 13.5px;
+      letter-spacing: 0.2px;
     }
 
     .points {
-      background: #1e2233;
+      background: rgba(28, 31, 48, 0.8);
       border-radius: 100px;
-      padding: 10px 20px;
-      font-weight: 700;
-      color: white;
+      padding: 10px 16px;
+      font-weight: 600;
+      color: var(--text-secondary);
       border: 1px solid #2e3348;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      white-space: nowrap;
     }
 
     .points span {
-      color: #FFD966;
-      font-size: 20px;
-      margin-right: 6px;
+      color: var(--gold);
+      font-size: 18px;
+      font-weight: 800;
+      margin-right: 2px;
+      letter-spacing: -0.5px;
     }
 
     /* Profile mini */
@@ -416,47 +772,70 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
+      padding: 12px;
+      background: rgba(10, 12, 20, 0.4);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-subtle);
     }
 
     .profile-mini .member-avatar {
-      width: 52px;
-      height: 52px;
-      font-size: 22px;
+      width: 50px;
+      height: 50px;
+      border-radius: 16px;
+      font-size: 19px;
     }
 
     .profile-mini h4 {
-      font-size: 17px;
+      font-size: 16px;
       font-weight: 600;
-      color: white;
+      color: var(--text-primary);
+      letter-spacing: -0.2px;
     }
 
     .profile-mini p {
-      color: #7e849e;
-      font-size: 13px;
+      color: var(--text-muted);
+      font-size: 12px;
+      margin-top: 3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .profile-mini p i {
+      color: var(--success);
+      font-size: 9px;
     }
 
     /* Digital card */
     .digital-card-wrapper {
-      margin-top: 12px;
-      perspective: 1000px;
+      perspective: 1200px;
       display: flex;
       justify-content: center;
+      margin-bottom: 18px;
     }
 
     .digital-card {
       width: 100%;
       max-width: 340px;
-      background: linear-gradient(135deg, #161a28, #0d0f17);
-      border-radius: 24px;
-      padding: 22px 22px 20px;
+      background: linear-gradient(145deg, #1a1e2e 0%, #0d0f17 100%);
+      border-radius: 22px;
+      padding: 22px;
       position: relative;
-      box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 215, 0, 0.2) inset;
+      box-shadow: 
+        0 25px 45px -18px rgba(0, 0, 0, 0.9),
+        0 1px 0 0 rgba(255, 255, 255, 0.05) inset;
       overflow: hidden;
-      transition: transform 0.2s;
+      transition: transform 0.4s var(--transition-smooth);
+      transform-style: preserve-3d;
+      cursor: pointer;
     }
 
-    /* glowing border animation */
+    .digital-card:hover {
+      transform: rotateY(4deg) rotateX(2deg) scale(1.015);
+    }
+
+    /* Animated glow borders */
     .digital-card::before {
       content: "";
       position: absolute;
@@ -464,18 +843,25 @@
       left: -2px;
       right: -2px;
       bottom: -2px;
-      border-radius: 26px;
+      border-radius: 24px;
       padding: 2px;
       background: linear-gradient(90deg, 
-        transparent, #FFD966, #FFB347, #FFD966, transparent);
+        transparent 0%, 
+        rgba(255, 215, 0, 0.9) 15%, 
+        #FFB347 30%, 
+        #FFD966 50%, 
+        #FFB347 70%, 
+        rgba(255, 215, 0, 0.9) 85%, 
+        transparent 100%);
       background-size: 300% 100%;
-      animation: borderGlow 4s linear infinite;
+      animation: borderGlow 3.5s linear infinite;
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       pointer-events: none;
       z-index: 2;
+      opacity: 0.85;
     }
 
     @keyframes borderGlow {
@@ -483,26 +869,31 @@
       100% { background-position: 300% 0; }
     }
 
-    /* second glowing ring — multiple lines effect */
     .digital-card::after {
       content: "";
       position: absolute;
-      top: -3px;
-      left: -3px;
-      right: -3px;
-      bottom: -3px;
-      border-radius: 27px;
+      top: -4px;
+      left: -4px;
+      right: -4px;
+      bottom: -4px;
+      border-radius: 26px;
       padding: 3px;
       background: linear-gradient(270deg, 
-        transparent, #ffffff80, #FFD96680, #FFB34780, #ffffff80, transparent);
+        transparent 0%, 
+        rgba(255, 255, 255, 0.5) 20%, 
+        rgba(255, 215, 0, 0.6) 40%, 
+        rgba(255, 179, 71, 0.6) 60%, 
+        rgba(255, 255, 255, 0.5) 80%, 
+        transparent 100%);
       background-size: 400% 100%;
-      animation: borderGlow2 6s linear infinite;
+      animation: borderGlow2 5.5s linear infinite;
       -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
       -webkit-mask-composite: xor;
       mask-composite: exclude;
       pointer-events: none;
       z-index: 3;
+      opacity: 0.6;
     }
 
     @keyframes borderGlow2 {
@@ -515,138 +906,183 @@
       z-index: 4;
       display: flex;
       flex-direction: column;
-      height: 100%;
     }
 
     .card-logo {
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 20px;
+      margin-bottom: 22px;
     }
 
     .card-logo i {
-      color: #FFD966;
-      font-size: 26px;
+      color: var(--gold);
+      font-size: 22px;
+      filter: drop-shadow(0 0 8px var(--gold-glow));
     }
 
     .card-logo span {
       font-weight: 700;
-      color: white;
-      letter-spacing: 0.5px;
-      font-size: 16px;
+      color: var(--text-primary);
+      letter-spacing: 1.5px;
+      font-size: 12.5px;
+      text-transform: uppercase;
     }
 
     .card-details {
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .card-details h3 {
-      font-size: 22px;
+      font-size: 21px;
       font-weight: 700;
-      color: white;
-      letter-spacing: -0.3px;
+      color: var(--text-primary);
+      letter-spacing: -0.4px;
     }
 
     .card-details .member-id {
-      font-family: monospace;
-      font-size: 16px;
-      color: #FFD966;
-      margin: 6px 0 2px;
-      letter-spacing: 1px;
+      font-family: 'Inter', monospace;
+      font-size: 14px;
+      color: var(--gold);
+      margin: 7px 0 3px;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .card-details .member-id i {
+      font-size: 11px;
+      opacity: 0.7;
     }
 
     .card-details .validity {
-      font-size: 12px;
-      color: #7e849e;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      font-weight: 500;
     }
 
     .card-chip {
-      background: linear-gradient(135deg, #d4af37, #b38f2a);
-      width: 48px;
-      height: 36px;
-      border-radius: 8px;
-      margin-top: 12px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      width: 44px;
+      height: 33px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, #e6c866, #b38f2a 50%, #d4af37);
+      margin-top: 14px;
+      box-shadow: 
+        0 3px 8px rgba(0,0,0,0.5),
+        0 0 0 1px rgba(255, 215, 0, 0.3) inset;
+      position: relative;
+    }
+
+    .card-chip::after {
+      content: '';
+      position: absolute;
+      inset: 5px;
+      border-radius: 4px;
+      border: 1px solid rgba(0,0,0,0.15);
     }
 
     .card-footer {
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
-      margin-top: 16px;
+      margin-top: 18px;
     }
 
     .card-footer .name {
-      font-size: 15px;
-      font-weight: 500;
-      color: #ccd0e6;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
-    .apple-wallet {
+    .apple-wallet-badge {
       display: flex;
       align-items: center;
       gap: 6px;
-      background: #ffffff10;
-      padding: 6px 12px;
+      background: rgba(255, 255, 255, 0.08);
+      padding: 7px 14px;
       border-radius: 40px;
-      border: 1px solid #ffffff20;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       color: #e0e4fc;
-      font-size: 12px;
-      font-weight: 500;
+      font-size: 11.5px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      backdrop-filter: blur(6px);
     }
 
-    /* action buttons */
+    .apple-wallet-badge i {
+      font-size: 14px;
+    }
+
+    /* Action buttons */
     .card-actions {
       display: flex;
-      gap: 12px;
-      margin-top: 18px;
+      gap: 10px;
       justify-content: center;
+      flex-wrap: wrap;
     }
 
     .action-btn {
-      background: #1e2233;
+      background: rgba(28, 31, 48, 0.7);
       border: 1px solid #2e3348;
       border-radius: 40px;
-      padding: 10px 18px;
-      color: #ccd0e6;
-      font-size: 13px;
-      font-weight: 500;
+      padding: 10px 16px;
+      color: var(--text-secondary);
+      font-size: 12.5px;
+      font-weight: 600;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 7px;
       cursor: pointer;
-      transition: 0.2s;
+      transition: all 0.25s var(--transition-smooth);
+      letter-spacing: 0.2px;
+      backdrop-filter: blur(6px);
     }
 
     .action-btn i {
-      color: #FFD966;
+      color: var(--gold);
+      font-size: 13px;
     }
 
     .action-btn:hover {
-      background: #2a2f44;
-      border-color: #FFD966;
+      background: rgba(38, 43, 64, 0.9);
+      border-color: var(--border-medium);
+      color: var(--text-primary);
+      transform: translateY(-1px);
     }
 
-    /* voice toast */
+    .action-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Voice toast */
     .voice-toast {
       position: fixed;
-      bottom: 30px;
+      bottom: 32px;
       left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: #FFD966;
-      color: #0b0d15;
-      padding: 14px 28px;
+      transform: translateX(-50%) translateY(120px);
+      background: linear-gradient(135deg, #FFE28C, #FFD966 40%, #E6B422);
+      color: #0a0c14;
+      padding: 15px 28px;
       border-radius: 60px;
-      font-weight: 600;
-      font-size: 15px;
-      box-shadow: 0 20px 30px -8px black;
+      font-weight: 700;
+      font-size: 14px;
+      box-shadow: 
+        0 24px 40px -12px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(255, 215, 0, 0.4);
       display: flex;
       align-items: center;
       gap: 12px;
-      transition: transform 0.4s ease;
+      transition: transform 0.45s var(--transition-smooth);
       z-index: 200;
       pointer-events: none;
+      letter-spacing: 0.2px;
+      max-width: 90vw;
     }
 
     .voice-toast.show {
@@ -654,114 +1090,223 @@
     }
 
     .voice-toast i {
-      font-size: 20px;
+      font-size: 18px;
     }
 
-    /* responsive */
-    @media (max-width: 1024px) {
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2e3348;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #3e4460;
+    }
+
+    /* Responsive */
+    @media (max-width: 1080px) {
       .dashboard-grid {
         grid-template-columns: 1fr 1fr;
       }
       .dashboard-grid > .card:nth-child(3) {
         grid-column: span 2;
       }
+      .dashboard-grid > .card:nth-child(3) .digital-card-wrapper {
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+      }
     }
 
-    @media (max-width: 680px) {
+    @media (max-width: 700px) {
+      body {
+        padding: 10px;
+      }
       .dashboard-grid {
         grid-template-columns: 1fr;
+        gap: 16px;
       }
       .dashboard-grid > .card:nth-child(3) {
         grid-column: span 1;
       }
       .app-container {
-        border-radius: 28px;
+        border-radius: 24px;
       }
       .dashboard {
-        padding: 20px;
+        padding: 20px 18px 28px;
       }
       .access-card {
-        padding: 32px 24px;
+        padding: 38px 24px 32px;
+      }
+      .access-card h1 {
+        font-size: 24px;
       }
       .top-bar {
         flex-direction: column;
         align-items: stretch;
       }
+      .brand {
+        justify-content: center;
+      }
+      .voice-support {
+        justify-content: center;
+      }
       .inactive-banner {
         flex-direction: column;
         gap: 12px;
         text-align: center;
+        padding: 16px 18px;
+        border-radius: var(--radius-lg);
+      }
+      .inactive-banner::before {
+        width: 100%;
+        height: 3px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: auto;
+      }
+      .inactive-banner-content {
+        justify-content: center;
+      }
+      .activate-btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .badge-points {
+        flex-direction: column;
+      }
+      .badge-icon, .points {
+        width: 100%;
+        justify-content: center;
+      }
+      .card-actions {
+        gap: 8px;
+      }
+      .action-btn {
+        flex: 1;
+        justify-content: center;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .access-input-group input {
+        font-size: 15px;
+        padding: 16px 20px 16px 46px;
+      }
+      .access-input-group button {
+        padding: 16px 20px;
+        font-size: 15px;
+      }
+      .digital-card {
+        padding: 16px;
+      }
+      .card-details h3 {
+        font-size: 18px;
+      }
+      .card-footer .name {
+        font-size: 11px;
+      }
+    }
+
+    /* Reduced motion */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
       }
     }
   </style>
 </head>
 <body>
   <div class="app-container" id="appContainer">
-    <!-- ACCESS SCREEN -->
+    <!-- ============ ACCESS SCREEN ============ -->
     <div class="access-screen" id="accessScreen">
       <div class="access-card">
-        <h1>Top Dog Records</h1>
-        <p>Enter your access ID to continue</p>
-        <div class="access-input-group">
-          <input type="password" id="accessInput" placeholder="ACCESS CODE" maxlength="6" inputmode="numeric" autocomplete="off">
-          <button id="accessBtn"><i class="fas fa-paw"></i> Enter Portal</button>
+        <div class="access-logo">
+          <i class="fas fa-dog"></i>
         </div>
-        <div class="access-hint"><i class="fas fa-lock"></i> Only authorized members</div>
+        <h1>Top Dog Records</h1>
+        <p class="access-subtitle">Enter your access ID to continue</p>
+        <div class="access-input-group">
+          <div class="access-input-wrapper">
+            <i class="fas fa-key"></i>
+            <input type="password" id="accessInput" placeholder="ENTER ACCESS CODE" maxlength="6" inputmode="numeric" autocomplete="off" aria-label="Access code">
+          </div>
+          <div class="access-error-msg" id="accessError">Invalid access code. Please try again.</div>
+          <button id="accessBtn" type="button"><i class="fas fa-paw"></i> Enter Portal</button>
+        </div>
+        <div class="access-hint">
+          <i class="fas fa-lock"></i> Only authorized members · Demo code: 2603
+        </div>
       </div>
     </div>
 
-    <!-- DASHBOARD (hidden until access) -->
+    <!-- ============ DASHBOARD ============ -->
     <div class="dashboard" id="dashboard" style="display: none;">
-      <!-- inactive banner ALWAYS displayed -->
-      <div class="inactive-banner">
-        <div><i class="fas fa-exclamation-circle"></i> Account inactive — please activate to enable full membership benefits.</div>
+      <!-- Inactive banner -->
+      <div class="inactive-banner" id="inactiveBanner">
+        <div class="inactive-banner-content">
+          <i class="fas fa-exclamation-circle"></i>
+          <span>Account inactive — please activate to enable full membership benefits.</span>
+        </div>
         <button class="activate-btn" id="activateBtn"><i class="fas fa-bolt"></i> Activate Now</button>
       </div>
 
-      <!-- top bar -->
+      <!-- Top bar -->
       <div class="top-bar">
         <div class="brand">
-          <i class="fas fa-dog"></i>
-          <h2>Top Dog <span>Records</span></h2>
+          <div class="brand-icon">
+            <i class="fas fa-dog"></i>
+          </div>
+          <div>
+            <h2>Top Dog <span>Records</span></h2>
+            <div class="brand-tagline">Fan Membership Portal</div>
+          </div>
         </div>
-        <div class="voice-support" id="voiceSupportBtn">
+        <div class="voice-support" id="voiceSupportBtn" role="button" tabindex="0" aria-label="Voice support">
           <i class="fas fa-volume-up"></i>
           <span>Voice support</span>
         </div>
       </div>
 
-      <!-- main grid -->
+      <!-- Main grid -->
       <div class="dashboard-grid">
-        <!-- new members info -->
+        <!-- New members -->
         <div class="card">
           <div class="card-header">
-            <h3><i class="fas fa-user-plus" style="margin-right: 10px;"></i> New members</h3>
-            <i class="fas fa-chevron-right"></i>
+            <h3><i class="fas fa-user-plus"></i> New members</h3>
+            <span class="header-action"><i class="fas fa-chevron-right"></i></span>
           </div>
-          <div class="new-members-list" id="newMembersList">
-            <!-- dynamic by JS -->
-          </div>
+          <div class="new-members-list" id="newMembersList"></div>
         </div>
 
-        <!-- contents / feed -->
+        <!-- Latest content -->
         <div class="card">
           <div class="card-header">
-            <h3><i class="fas fa-newspaper" style="margin-right: 10px;"></i> Latest content</h3>
-            <i class="fas fa-ellipsis-h"></i>
+            <h3><i class="fas fa-newspaper"></i> Latest content</h3>
+            <span class="header-action"><i class="fas fa-ellipsis-h"></i></span>
           </div>
-          <div id="feedList">
-            <!-- dynamic -->
-          </div>
+          <div id="feedList"></div>
         </div>
 
-        <!-- badge, points, profile, digital card -->
-        <div class="card" style="display: flex; flex-direction: column;">
+        <!-- Membership -->
+        <div class="card">
           <div class="card-header">
-            <h3><i class="fas fa-id-card" style="margin-right: 10px;"></i> Membership</h3>
-            <i class="fas fa-gem"></i>
+            <h3><i class="fas fa-id-card"></i> Membership</h3>
+            <span class="header-action"><i class="fas fa-gem"></i></span>
           </div>
 
-          <!-- badge & points -->
+          <!-- Badge & points -->
           <div class="badge-points">
             <div class="badge-icon">
               <i class="fas fa-medal"></i>
@@ -772,32 +1317,32 @@
             </div>
           </div>
 
-          <!-- profile mini -->
+          <!-- Profile mini -->
           <div class="profile-mini">
             <div class="member-avatar" id="profileAvatar">JD</div>
             <div>
               <h4 id="profileName">Jordan D.</h4>
-              <p id="profileMemberSince">Member since 2024</p>
+              <p id="profileMemberSince"><i class="fas fa-circle"></i> Member since 2024</p>
             </div>
           </div>
 
-          <!-- digital card -->
+          <!-- Digital card -->
           <div class="digital-card-wrapper">
             <div class="digital-card" id="digitalCard">
               <div class="card-content">
                 <div class="card-logo">
                   <i class="fas fa-dog"></i>
-                  <span>TOP DOG RECORDS</span>
+                  <span>Top Dog Records</span>
                 </div>
                 <div class="card-details">
                   <h3 id="cardHolderName">Jordan D.</h3>
-                  <div class="member-id" id="cardMemberId">#TDR-2603-88</div>
-                  <div class="validity">VALID THRU 12/28</div>
+                  <div class="member-id" id="cardMemberId"><i class="fas fa-hashtag"></i> TDR-2603-88</div>
+                  <div class="validity">Valid thru 12/28</div>
                 </div>
                 <div class="card-chip"></div>
                 <div class="card-footer">
-                  <span class="name" id="cardFooterName">JORDAN D.</span>
-                  <div class="apple-wallet">
+                  <span class="name" id="cardFooterName">Jordan D.</span>
+                  <div class="apple-wallet-badge">
                     <i class="fab fa-apple"></i> Wallet
                   </div>
                 </div>
@@ -805,17 +1350,17 @@
             </div>
           </div>
 
-          <!-- export actions -->
+          <!-- Actions -->
           <div class="card-actions">
-            <div class="action-btn" id="exportPngBtn"><i class="fas fa-download"></i> PNG</div>
-            <div class="action-btn" id="exportWalletBtn"><i class="fab fa-apple"></i> Wallet</div>
-            <div class="action-btn" id="exportDocBtn"><i class="fas fa-file-pdf"></i> Doc</div>
+            <div class="action-btn" id="exportPngBtn" role="button" tabindex="0"><i class="fas fa-download"></i> PNG</div>
+            <     div class="action-btn" id="exportWalletBtn" role="button" tabindex="0"><i class="fab fa-apple"></i> Wallet</div>
+            <div class="action-btn" id="exportDocBtn" role="button" tabindex="0"><i class="fas fa-file-alt"></i> Doc</div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- voice toast -->
+    <!-- Voice toast -->
     <div class="voice-toast" id="voiceToast">
       <i class="fas fa-volume-up"></i>
       <span id="voiceMessage">Voice support active</span>
@@ -824,7 +1369,9 @@
 
   <script>
     (function() {
-      // ---------- CONFIG ----------
+      'use strict';
+
+      // ============ CONFIG ============
       const ACCESS_CODE = "2603";
       const MEMBER = {
         name: "Jordan D.",
@@ -835,11 +1382,12 @@
         badge: "Gold Fan"
       };
 
-      // DOM elements
+      // ============ DOM REFS ============
       const accessScreen = document.getElementById('accessScreen');
       const dashboard = document.getElementById('dashboard');
       const accessInput = document.getElementById('accessInput');
       const accessBtn = document.getElementById('accessBtn');
+      const accessError = document.getElementById('accessError');
       const voiceSupportBtn = document.getElementById('voiceSupportBtn');
       const voiceToast = document.getElementById('voiceToast');
       const voiceMessage = document.getElementById('voiceMessage');
@@ -847,12 +1395,20 @@
       const exportPngBtn = document.getElementById('exportPngBtn');
       const exportWalletBtn = document.getElementById('exportWalletBtn');
       const exportDocBtn = document.getElementById('exportDocBtn');
+      const newMembersList = document.getElementById('newMembersList');
+      const feedList = document.getElementById('feedList');
+      const profileAvatar = document.getElementById('profileAvatar');
+      const profileName = document.getElementById('profileName');
+      const profileMemberSince = document.getElementById('profileMemberSince');
+      const cardHolderName = document.getElementById('cardHolderName');
+      const cardMemberId = document.getElementById('cardMemberId');
+      const cardFooterName = document.getElementById('cardFooterName');
 
-      // data
+ // ============ DATA ============
       const newMembers = [
         { name: "Alex Rivera", initials: "AR", joinDate: "2 hours ago" },
         { name: "Sam Chen", initials: "SC", joinDate: "5 hours ago" },
-        { name: "Taylor M.", initials: "TM", joinDate: "yesterday" },
+        { name: "Taylor M.", initials: "TM", joinDate: "Yesterday" },
         { name: "Jamie Fox", initials: "JF", joinDate: "2 days ago" }
       ];
 
@@ -863,171 +1419,226 @@
         { icon: "fa-calendar", text: "Live Q&A with Top Dog artists", time: "2d ago" }
       ];
 
-      // ---------- RENDER DYNAMIC CONTENT ----------
+      // ============ VOICE SUPPORT ============
+      let speechSynth = window.speechSynthesis || null;
+      let isSpeaking = false;
+
+      function speak(text) {
+        // Update UI
+        voiceMessage.textContent = text.length > 80 ? text.substring(0, 77) + '...' : text;
+        voiceToast.classList.add('show');
+
+        // Clear previous timeout
+        if (window._voiceTimeout) clearTimeout(window._voiceTimeout);
+        window._voiceTimeout = setTimeout(() => {
+          voiceToast.classList.remove('show');
+        }, 3200);
+
+        // Actual speech
+        if (speechSynth) {
+          speechSynth.cancel();
+          const utterance = new SpeechSynthesisUtterance(text);
+          utterance.rate = 0.95;
+          utterance.pitch = 1.0;
+          utterance.volume = 1;
+          utterance.lang = 'en-US';
+          utterance.onstart = () => {
+            isSpeaking = true;
+            voiceSupportBtn.classList.add('speaking');
+          };
+          utterance.onend = () => {
+            isSpeaking = false;
+            voiceSupportBtn.classList.remove('speaking');
+          };
+          utterance.onerror = () => {
+            isSpeaking = false;
+            voiceSupportBtn.classList.remove('speaking');
+          };
+          speechSynth.speak(utterance);
+        }
+      }
+
+      // ============ RENDER FUNCTIONS ============
       function renderNewMembers() {
-        const container = document.getElementById('newMembersList');
-        if (!container) return;
-        container.innerHTML = newMembers.map(m => `
+        newMembersList.innerHTML = newMembers.map(m => `
           <div class="member-item">
             <div class="member-avatar">${m.initials}</div>
             <div class="member-details">
               <h4>${m.name}</h4>
-              <p>Joined ${m.joinDate}</p>
+              <p><i class="fas fa-circle"></i> Joined ${m.joinDate}</p>
             </div>
           </div>
         `).join('');
       }
 
       function renderFeed() {
-        const container = document.getElementById('feedList');
-        if (!container) return;
-        container.innerHTML = feedItems.map(f => `
+        feedList.innerHTML = feedItems.map(f => `
           <div class="feed-item">
             <div class="feed-icon"><i class="fas ${f.icon}"></i></div>
             <div class="feed-text">
               <p>${f.text}</p>
-              <span>${f.time}</span>
+              <span><i class="fas fa-clock"></i> ${f.time}</span>
             </div>
           </div>
         `).join('');
       }
 
       function renderMemberInfo() {
-        document.getElementById('profileAvatar').textContent = MEMBER.initials;
-        document.getElementById('profileName').textContent = MEMBER.name;
-        document.getElementById('profileMemberSince').textContent = `Member since ${MEMBER.since}`;
-        document.getElementById('cardHolderName').textContent = MEMBER.name;
-        document.getElementById('cardMemberId').textContent = `#${MEMBER.memberId}`;
-        document.getElementById('cardFooterName').textContent = MEMBER.name.toUpperCase();
+        profileAvatar.textContent = MEMBER.initials;
+        profileName.textContent = MEMBER.name;
+        profileMemberSince.innerHTML = `<i class="fas fa-circle"></i> Member since ${MEMBER.since}`;
+        cardHolderName.textContent = MEMBER.name;
+        cardMemberId.innerHTML = `<i class="fas fa-hashtag"></i> ${MEMBER.memberId}`;
+        cardFooterName.textContent = MEMBER.name.toUpperCase();
       }
 
-      // ---------- VOICE SUPPORT ----------
-      function speak(text) {
-        if (!('speechSynthesis' in window)) {
-          showVoiceToast('Voice not supported');
-          return;
+      // ============ ACCESS CONTROL ============
+      function grantAccess() {
+        accessScreen.classList.add('hidden');
+        dashboard.style.display = 'flex';
+
+        // Render dynamic content
+        renderNewMembers();
+        renderFeed();
+        renderMemberInfo();
+
+        // Welcome voice after transition
+        setTimeout(() => {
+          speak('Welcome Jordan. Your account is currently inactive. Please activate to unlock full membership benefits.');
+        }, 700);
+      }
+
+      function checkAccess() {
+        const entered = accessInput.value.trim();
+        if (entered === ACCESS_CODE) {
+          accessError.classList.remove('show');
+          accessInput.classList.remove('error');
+          grantAccess();
+        } else {
+          // Error state
+          accessInput.classList.add('error');
+          accessError.classList.add('show');
+          accessInput.value = '';
+          accessInput.focus();
+
+          // Shake animation
+          accessInput.style.animation = 'none';
+          accessInput.offsetHeight; // trigger reflow
+          accessInput.style.animation = 'shake 0.4s var(--transition-smooth)';
+
+          speak('Invalid access code. Please try again.');
+
+          setTimeout(() => {
+            accessInput.classList.remove('error');
+          }, 1200);
+          setTimeout(() => {
+            accessError.classList.remove('show');
+          }, 2500);
         }
-        // Cancel any ongoing speech
-        window.speechSynthesis.cancel();
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.rate = 0.95;
-        utterance.pitch = 1.0;
-        utterance.volume = 1;
-        utterance.lang = 'en-US';
-        window.speechSynthesis.speak(utterance);
-        showVoiceToast(text);
       }
 
-      function showVoiceToast(message) {
-        voiceMessage.textContent = message;
-        voiceToast.classList.add('show');
-        setTimeout(() => {
-          voiceToast.classList.remove('show');
-        }, 2800);
-      }
-
-      // Voice support button
-      voiceSupportBtn.addEventListener('click', () => {
-        speak('Voice support active. Your account is currently inactive. Please activate to unlock full membership benefits.');
-      });
-
-      // ---------- INACTIVE ACTIVATE ----------
-      activateBtn.addEventListener('click', () => {
-        speak('Activating your account. Welcome to Top Dog Records full membership.');
-        // Visual feedback
-        activateBtn.innerHTML = '<i class="fas fa-check-circle"></i> Activated';
-        activateBtn.style.background = '#2e7d32';
-        activateBtn.disabled = true;
-        setTimeout(() => {
-          activateBtn.innerHTML = '<i class="fas fa-bolt"></i> Activate Now';
-          activateBtn.style.background = '#ff4b4b';
-          activateBtn.disabled = false;
-        }, 4000);
-      });
-
-      // ---------- EXPORT FUNCTIONS ----------
+      // ============ EXPORT FUNCTIONS ============
       function downloadPNG() {
-        // Create a canvas to draw the digital card
-        const card = document.getElementById('digitalCard');
-        if (!card) return;
-
-        // Use html2canvas approach? Not available. Simulate with canvas drawing.
-        // For simplicity and reliability, we generate a nicely styled PNG with canvas.
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
         canvas.width = 680;
         canvas.height = 400;
-        ctx.fillStyle = '#0b0d15';
+
+        // Background
+        const bgGradient = ctx.createLinearGradient(0, 0, 680, 400);
+        bgGradient.addColorStop(0, '#1a1e2e');
+        bgGradient.addColorStop(1, '#0d0f17');
+        ctx.fillStyle = bgGradient;
         ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        // card background
-        const gradient = ctx.createLinearGradient(0, 0, 680, 400);
-        gradient.addColorStop(0, '#161a28');
-        gradient.addColorStop(1, '#0d0f17');
-        ctx.fillStyle = gradient;
-        ctx.shadowColor = '#FFD966';
-        ctx.shadowBlur = 20;
+        // Card body
+        ctx.shadowColor = 'rgba(255, 215, 0, 0.3)';
+        ctx.shadowBlur = 25;
+        ctx.fillStyle = '#161a28';
         ctx.beginPath();
         ctx.roundRect(40, 40, 600, 320, 24);
         ctx.fill();
         ctx.shadowBlur = 0;
 
-        // border glow
+        // Border
         ctx.strokeStyle = '#FFD966';
-        ctx.lineWidth = 4;
+        ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.roundRect(40, 40, 600, 320, 24);
         ctx.stroke();
 
-        // content
-        ctx.fillStyle = '#ffffff';
+        // Logo
+        ctx.fillStyle = '#FFD966';
+        ctx.font = 'bold 24px Inter, sans-serif';
+        ctx.fillText('🐕 TOP DOG RECORDS', 70, 105);
+
+        // Member name
+        ctx.fillStyle = '#f0f2ff';
         ctx.font = 'bold 28px Inter, sans-serif';
-        ctx.fillText('TOP DOG RECORDS', 70, 110);
+        ctx.fillText(MEMBER.name, 70, 175);
 
+        // Member ID
         ctx.fillStyle = '#FFD966';
-        ctx.font = 'bold 22px monospace';
-        ctx.fillText(MEMBER.name, 70, 180);
-        ctx.fillStyle = '#FFD966';
-        ctx.font = '18px monospace';
-        ctx.fillText('#' + MEMBER.memberId, 70, 220);
-        ctx.fillStyle = '#7e849e';
-        ctx.font = '14px Inter';
-        ctx.fillText('VALID THRU 12/28', 70, 260);
+        ctx.font = 'bold 18px monospace';
+        ctx.fillText('#' + MEMBER.memberId, 70, 215);
 
-        ctx.fillStyle = '#ccd0e6';
-        ctx.font = '16px Inter';
-        ctx.fillText('JORDAN D.', 70, 320);
+        // Validity
+        ctx.fillStyle = '#5e6480';
+        ctx.font = '14px Inter, sans-serif';
+        ctx.fillText('VALID THRU 12/28', 70, 255);
 
-        // Apple wallet badge
-        ctx.fillStyle = '#ffffff20';
+        // Footer name
+        ctx.fillStyle = '#a0a6c4';
+        ctx.font = 'bold 14px Inter, sans-serif';
+        ctx.fillText(MEMBER.name.toUpperCase(), 70, 320);
+
+        // Walletng badge
+        ctx.fillStyle = 'rgba(255,255,255,0.08)';
         ctx.beginPath();
-        ctx.roundRect(480, 300, 120, 36, 20);
+        ctx.roundRect(470, 295, 130, 36, 20);
         ctx.fill();
+        ctx.strokeStyle = 'rgba(255,255,255,0.15)';
+        ctx.lineWidth = 1;
+        ctx.stroke();
+
         ctx.fillStyle = '#e0e4fc';
-        ctx.font = '14px Inter';
-        ctx.fillText(' Wallet', 505, 324);
+        ctx.font = '13px Inter, sans-serif';
+        ctx.fillText(' Wallet', 500, 319);
 
         // Download
         const link = document.createElement('a');
-        link.download = `TopDog_Membership_${MEMBER.name.replace(' ', '_')}.png`;
-        link.href = canvas.toDataURL('image/png');
+        link.download = `TopDog_Membership_${MEMBER.name.replace(/\s/g, '_')}.png`;
+        link.href = canvas.toDataURL('image/p');
         link.click();
-        speak('Membership card exported as PNG.');
+        speak('Membership card exported as PNG image.');
       }
 
       function downloadWalletPass() {
-        // Simulate Apple Wallet .pkpass (just a text file, but we make it look real)
-        const content = `Top Dog Records Membership Pass\nMember: ${MEMBER.name}\nID: ${MEMBER.memberId}\nStatus: Active\nBadge: Gold Fan\nPoints: ${MEMBER.points}\n--- Apple Wallet compatible ---`;
+        const content = `Top Dog Records Membership Pass
+================================
+Member: ${MEMBER.name}
+Member ID: ${MEMBER.memberId}
+Member Since: ${MEMBER.since}
+Badge: ${MEMBER.badge}
+Fan Points: ${MEMBER.points}
+
+Status: Pending Activation
+--------------------------------
+This pass is compatible with Apple Wallet.
+Add it to your Wallet for quick access to your membership.
+
+© Top Dog Records. All rights reserved.`;
+
         const blob = new Blob([content], { type: 'application/vnd.apple.pkpass' });
         const link = document.createElement('a');
-        link.download = `TopDog_Membership_${MEMBER.name.replace(' ', '_')}.pkpass`;
+        link.download = `TopDog_Membership_${MEMBER.name.replace(/\s/g, '_')}.pkpass`;
         link.href = URL.createObjectURL(blob);
         link.click();
+        URL.revokeObjectURL(link.href);
         speak('Apple Wallet pass downloaded. Add to Wallet for easy access.');
       }
 
       function downloadDocument() {
-        // Create a simple PDF-like text document (actually .txt for simplicity, but named .pdf? better as .txt to avoid broken)
         const docContent = `
 TOP DOG RECORDS - MEMBERSHIP DOCUMENT
 =====================================
@@ -1037,83 +1648,113 @@ Member Since: ${MEMBER.since}
 Badge: ${MEMBER.badge}
 Fan Points: ${MEMBER.points}
 
-This document certifies active membership (pending activation). 
+This document certifies active membership.
 For full benefits, please activate your account in the portal.
+
+Status: INACTIVE — ACTIVATION REQUIRED
         `;
-        const blob = new Blob([docContent], { type: 'text/plain' });
+
+        const blob = new Blob([docContent], { type: 'text/plain;charset=utf-8' });
         const link = document.createElement('a');
-        link.download = `TopDog_Membership_Document_${MEMBER.name.replace(' ', '_')}.txt`;
+        link.download = `TopDog_Membership_Document_${MEMBER.name.replace(/\s/g, '_')}.txt`;
         link.href = URL.createObjectURL(blob);
         link.click();
-        speak('Membership document exported.');
+        URL.revokeObjectURL(link.href);
+        speak('Membership document exported successfully.');
       }
 
-      // ---------- ACCESS CONTROL ----------
-      function grantAccess() {
-        accessScreen.classList.add('hidden');
-        dashboard.style.display = 'flex';
-        // Render dynamic content
-        renderNewMembers();
-        renderFeed();
-        renderMemberInfo();
-
-        // Welcome voice
-        setTimeout(() => {
-          speak('Welcome Jordan. Your account is inactive. Please activate to unlock full membership benefits.');
-        }, 600);
-      }
-
-      function checkAccess() {
-        const entered = accessInput.value.trim();
-        if (entered === ACCESS_CODE) {
-          grantAccess();
-        } else {
-          // error shake
-          accessInput.style.borderColor = '#ff4b4b';
-          accessInput.style.boxShadow = '0 0 0 4px rgba(255, 75, 75, 0.2)';
-          setTimeout(() => {
-            accessInput.style.borderColor = '#2e3348';
-            accessInput.style.boxShadow = 'none';
-          }, 1000);
-          speak('Invalid access code. Please try again.');
-        }
-      }
-
-      // ---------- EVENT LISTENERS ----------
+      // ============ EVENT LISTENERS ============
       accessBtn.addEventListener('click', checkAccess);
       accessInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') checkAccess();
       });
 
+      // Clear error on input
+      accessInput.addEventListener('input', () => {
+        accessInput.classList.remove('error');
+        accessError.classList.remove('show');
+      });
+
+      // Voice support
+      voiceSupportBtn.addEventListener('click', () => {
+        speak('Voice support active. Your account is currently inactive. Please activate to unlock full membership benefits.');
+      });
+
+      voiceSupportBtn.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          voiceSupportBtn.click();
+        }
+      });
+
+      // Activate button
+      activateBtn.addEventListener('click', () => {
+        speak('Activating your account. Welcome to Top Dog Records full membership.');
+        activateBtn.classList.add('activated');
+        activateBtn.innerHTML = '<i class="fas fa-check-circle"></i> Activated';
+
+        // Update banner
+        const banner = document.getElementById('inactiveBanner');
+        banner.style.background = 'linear-gradient(135deg, rgba(74, 222, 128, 0.1), rgba(74, 222, 128, 0.04))';
+        banner.style.borderColor = 'rgba(74, 222, 128, 0.25)';
+        banner.style.color = '#86efac';
+        banner.querySelector('.inactive-banner-content i').style.color = '#4ade80';
+        banner.querySelector('.inactive-banner-content i').className = 'fas fa-check-circle';
+        banner.querySelector('.inactive-banner-content span').textContent = 'Account activated — full membership benefits enabled!';
+
+        // Reset after 5 seconds
+        setTimeout(() => {
+          activateBtn.classList.remove('activated');
+          activateBtn.innerHTML = '<i class="fas fa-bolt"></i> Activate Now';
+          banner.style.background = 'linear-gradient(135deg, rgba(255, 92, 92, 0.1), rgba(255, 92, 92, 0.04))';
+          banner.style.borderColor = 'rgba(255, 92, 92, 0.25)';
+          banner.style.color = '#ff9b9b';
+          banner.querySelector('.inactive-banner-content i').style.color = '#ff5c5c';
+          banner.querySelector('.inactive-banner-content i').className = 'fas fa-exclamation-circle';
+          banner.querySelector('.inactive-banner-content span').textContent = 'Account inactive — please activate to enable full membership benefits.';
+        }, 5000);
+      });
+
+      // Export buttons
       exportPngBtn.addEventListener('click', downloadPNG);
       exportWalletBtn.addEventListener('click', downloadWalletPass);
       exportDocBtn.addEventListener('click', downloadDocument);
 
-      // Preset demo access? No, user must enter 2603.
-      // But for convenience, we could auto-fill? Not needed, but user can test.
-      // Add a small hint: (demo 2603)
-      accessInput.placeholder = 'ACCESS CODE (2603 demo)';
-
-      // Additional voice on hover of card?
-      document.getElementById('digitalCard')?.addEventListener('mouseenter', () => {
-        // subtle voice? optional skip
+      // Keyboard accessibility for export buttons
+      [exportPngBtn, exportWalletBtn, exportDocBtn].forEach(btn => {
+        btn.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            btn.click();
+          }
+        });
       });
 
-      // Polyfill for canvas roundRect
-      CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
-        if (w < 2 * r) r = w / 2;
-        if (h < 2 * r) r = h / 2;
-        this.moveTo(x + r, y);
-        this.lineTo(x + w - r, y);
-        this.quadraticCurveTo(x + w, y, x + w, y + r);
-        this.lineTo(x + w, y + h - r);
-        this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
-        this.lineTo(x + r, y + h);
-        this.quadraticCurveTo(x, y + h, x, y + h - r);
-        this.lineTo(x, y + r);
-        this.quadraticCurveTo(x, y, x + r, y);
-        return this;
-      };
+      // ============ POLYFILL ============
+      if (!CanvasRenderingContext2D.prototype.roundRect) {
+        CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+          if (w < 2 * r) r = w / 2;
+          if (h < 2 * r) r = h / 2;
+          this.moveTo(x + r, y);
+          this.lineTo(x + w - r, y);
+          this.quadraticCurveTo(x + w, y, x + w, y + r);
+          this.lineTo(x + w, y + h - r);
+          this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+          this.lineTo(x + r, y + h);
+          this.quadraticCurveTo(x, y + h, x, y + h - r);
+          this.lineTo(x, y + r);
+          this.quadraticCurveTo(x, y, x + r, y);
+          return this;
+        };
+      }
+
+      // ============ INIT ============
+      // Focus input on load
+      setTimeout(() => accessInput.focus(), 300);
+
+      // Pre-fill demo hint
+      accessInput.placeholder = 'ENTER ACCESS CODE';
+
     })();
   </script>
 </body>
