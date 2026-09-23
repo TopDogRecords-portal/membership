@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Top Dog Records · Fan Portal</title>
+  <!-- Font Awesome 6 (Free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background: #0b0d15;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    /* main app container – fixed width, realistic */
+    .app-container {
+      max-width: 1280px;
+      width: 100%;
+      background: #11131f;
+      border-radius: 40px;
+      box-shadow: 0 30px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 215, 0, 0.1) inset;
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+      position: relative;
+    }
+
+    /* Access screen overlay */
+    .access-screen {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 20%, #1a1e2f, #0a0c14);
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 0.4s ease, visibility 0.4s;
+      backdrop-filter: blur(10px);
+      border-radius: 40px;
+    }
+
+    .access-screen.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .access-card {
+      background: rgba(20, 22, 36, 0.9);
+      border-radius: 48px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 440px;
+      box-shadow: 0 25px 40px -10px rgba(0,0,0,0.8), 0 0 0 1px rgba(255, 215, 0, 0.2);
+      text-align: center;
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .access-card h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #FFD966, #FFB347);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 8px;
+    }
+
+    .access-card p {
+      color: #a0a4c0;
+      font-size: 15px;
+      margin-bottom: 32px;
+      font-weight: 400;
+    }
+
+    .access-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .access-input-group input {
+      background: #1e2233;
+      border: 1.5px solid #2e3348;
+      border-radius: 60px;
+      padding: 18px 24px;
+      font-size: 18px;
+      font-weight: 500;
+      color: #f0f2ff;
+      text-align: center;
+      letter-spacing: 4px;
+      transition: 0.2s;
+      outline: none;
+    }
+
+    .access-input-group input:focus {
+      border-color: #FFD966;
+      box-shadow: 0 0 0 4px rgba(255, 215, 0, 0.15);
+    }
+
+    .access-input-group input::placeholder {
+      color: #4a4f6a;
+      letter-spacing: 1px;
+      font-weight: 400;
+    }
+
+    .access-input-group button {
+      background: linear-gradient(135deg, #FFD966, #e6b422);
+      border: none;
+      border-radius: 60px;
+      padding: 18px 24px;
+      font-size: 18px;
+      font-weight: 700;
+      color: #0b0d15;
+      cursor: pointer;
+      transition: all 0.2s;
+      box-shadow: 0 8px 20px -6px rgba(255, 215, 0, 0.3);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .access-input-group button:hover {
+      background: linear-gradient(135deg, #ffe28c, #f5c542);
+      transform: scale(1.01);
+    }
+
+    .access-hint {
+      margin-top: 24px;
+      font-size: 13px;
+      color: #5e6480;
+    }
+
+    /* main dashboard */
+    .dashboard {
+      display: flex;
+      flex-direction: column;
+      padding: 32px 32px 40px;
+      background: linear-gradient(145deg, #11131f 0%, #0b0d15 100%);
+      min-height: 700px;
+    }
+
+    /* inactive banner */
+    .inactive-banner {
+      background: rgba(255, 75, 75, 0.12);
+      border: 1px solid rgba(255, 75, 75, 0.4);
+      border-radius: 60px;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      backdrop-filter: blur(4px);
+      color: #ff7b7b;
+      font-weight: 500;
+      font-size: 15px;
+      letter-spacing: 0.3px;
+    }
+
+    .inactive-banner i {
+      margin-right: 10px;
+      font-size: 18px;
+    }
+
+    .activate-btn {
+      background: #ff4b4b;
+      border: none;
+      border-radius: 40px;
+      padding: 8px 22px;
+      color: white;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: 0.2s;
+      box-shadow: 0 6px 12px -4px rgba(255, 75, 75, 0.3);
+      white-space: nowrap;
+    }
+
+    .activate-btn:hover {
+      background: #ff6363;
+    }
+
+    /* header row */
+    .top-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand i {
+      font-size: 32px;
+      color: #FFD966;
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+    }
+
+    .brand h2 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+      color: white;
+    }
+
+    .brand span {
+      color: #FFD966;
+      font-weight: 300;
+    }
+
+    .voice-support {
+      background: #1e2233;
+      border-radius: 60px;
+      padding: 12px 22px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      border: 1px solid #2e3348;
+      cursor: pointer;
+      transition: 0.2s;
+      color: #d0d4f0;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .voice-support i {
+      color: #FFD966;
+      font-size: 20px;
+    }
+
+    .voice-support:hover {
+      background: #262b3f;
+      border-color: #FFD966;
+    }
+
+    /* grid layout */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.9fr 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    /* cards general */
+    .card {
+      background: rgba(22, 25, 38, 0.8);
+      border-radius: 32px;
+      padding: 24px;
+      border: 1px solid rgba(255, 215, 0, 0.1);
+      box-shadow: 0 15px 25px -10px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(6px);
+      transition: border-color 0.2s;
+    }
+
+    .card:hover {
+      border-color: rgba(255, 215, 0, 0.3);
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .card-header h3 {
+      font-size: 18px;
+      font-weight: 600;
+      color: white;
+      letter-spacing: -0.2px;
+    }
+
+    .card-header i {
+      color: #FFD966;
+      font-size: 20px;
+    }
+
+    /* new members info */
+    .new-members-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .member-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .member-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 40px;
+      background: linear-gradient(135deg, #2e3348, #1b1f30);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #FFD966;
+      font-size: 18px;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .member-details h4 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #f0f2ff;
+    }
+
+    .member-details p {
+      font-size: 12px;
+      color: #7e849e;
+      margin-top: 2px;
+    }
+
+    /* contents / feed */
+    .feed-item {
+      display: flex;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid #252a3c;
+    }
+
+    .feed-item:last-child {
+      border-bottom: none;
+    }
+
+    .feed-icon {
+      color: #FFD966;
+      font-size: 18px;
+      margin-top: 3px;
+    }
+
+    .feed-text p {
+      font-size: 14px;
+      color: #cdd1e6;
+      line-height: 1.4;
+    }
+
+    .feed-text span {
+      font-size: 11px;
+      color: #5e6480;
+      display: block;
+      margin-top: 4px;
+    }
+
+    /* Badge & points */
+    .badge-points {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .badge-icon {
+      background: linear-gradient(145deg, #2b2f44, #1b1f30);
+      border-radius: 100px;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+    }
+
+    .badge-icon i {
+      color: #FFD966;
+      font-size: 22px;
+    }
+
+    .badge-icon span {
+      font-weight: 600;
+      color: #FFD966;
+    }
+
+    .points {
+      background: #1e2233;
+      border-radius: 100px;
+      padding: 10px 20px;
+      font-weight: 700;
+      color: white;
+      border: 1px solid #2e3348;
+    }
+
+    .points span {
+      color: #FFD966;
+      font-size: 20px;
+      margin-right: 6px;
+    }
+
+    /* Profile mini */
+    .profile-mini {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .profile-mini .member-avatar {
+      width: 52px;
+      height: 52px;
+      font-size: 22px;
+    }
+
+    .profile-mini h4 {
+      font-size: 17px;
+      font-weight: 600;
+      color: white;
+    }
+
+    .profile-mini p {
+      color: #7e849e;
+      font-size: 13px;
+    }
+
+    /* Digital card */
+    .digital-card-wrapper {
+      margin-top: 12px;
+      perspective: 1000px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .digital-card {
+      width: 100%;
+      max-width: 340px;
+      background: linear-gradient(135deg, #161a28, #0d0f17);
+      border-radius: 24px;
+      padding: 22px 22px 20px;
+      position: relative;
+      box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 215, 0, 0.2) inset;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    /* glowing border animation */
+    .digital-card::before {
+      content: "";
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border-radius: 26px;
+      padding: 2px;
+      background: linear-gradient(90deg, 
+        transparent, #FFD966, #FFB347, #FFD966, transparent);
+      background-size: 300% 100%;
+      animation: borderGlow 4s linear infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    @keyframes borderGlow {
+      0% { background-position: 0% 0; }
+      100% { background-position: 300% 0; }
+    }
+
+    /* second glowing ring — multiple lines effect */
+    .digital-card::after {
+      content: "";
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      border-radius: 27px;
+      padding: 3px;
+      background: linear-gradient(270deg, 
+        transparent, #ffffff80, #FFD96680, #FFB34780, #ffffff80, transparent);
+      background-size: 400% 100%;
+      animation: borderGlow2 6s linear infinite;
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      z-index: 3;
+    }
+
+    @keyframes borderGlow2 {
+      0% { background-position: 0% 0; }
+      100% { background-position: 400% 0; }
+    }
+
+    .card-content {
+      position: relative;
+      z-index: 4;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .card-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .card-logo i {
+      color: #FFD966;
+      font-size: 26px;
+    }
+
+    .card-logo span {
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.5px;
+      font-size: 16px;
+    }
+
+    .card-details {
+      margin-bottom: 18px;
+    }
+
+    .card-details h3 {
+      font-size: 22px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: -0.3px;
+    }
+
+    .card-details .member-id {
+      font-family: monospace;
+      font-size: 16px;
+      color: #FFD966;
+      margin: 6px 0 2px;
+      letter-spacing: 1px;
+    }
+
+    .card-details .validity {
+      font-size: 12px;
+      color: #7e849e;
+    }
+
+    .card-chip {
+      background: linear-gradient(135deg, #d4af37, #b38f2a);
+      width: 48px;
+      height: 36px;
+      border-radius: 8px;
+      margin-top: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    }
+
+    .card-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-top: 16px;
+    }
+
+    .card-footer .name {
+      font-size: 15px;
+      font-weight: 500;
+      color: #ccd0e6;
+    }
+
+    .apple-wallet {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff10;
+      padding: 6px 12px;
+      border-radius: 40px;
+      border: 1px solid #ffffff20;
+      color: #e0e4fc;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* action buttons */
+    .card-actions {
+      display: flex;
+      gap: 12px;
+      margin-top: 18px;
+      justify-content: center;
+    }
+
+    .action-btn {
+      background: #1e2233;
+      border: 1px solid #2e3348;
+      border-radius: 40px;
+      padding: 10px 18px;
+      color: #ccd0e6;
+      font-size: 13px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .action-btn i {
+      color: #FFD966;
+    }
+
+    .action-btn:hover {
+      background: #2a2f44;
+      border-color: #FFD966;
+    }
+
+    /* voice toast */
+    .voice-toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #FFD966;
+      color: #0b0d15;
+      padding: 14px 28px;
+      border-radius: 60px;
+      font-weight: 600;
+      font-size: 15px;
+      box-shadow: 0 20px 30px -8px black;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: transform 0.4s ease;
+      z-index: 200;
+      pointer-events: none;
+    }
+
+    .voice-toast.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    .voice-toast i {
+      font-size: 20px;
+    }
+
+    /* responsive */
+    @media (max-width: 1024px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .dashboard-grid > .card:nth-child(3) {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+      .dashboard-grid > .card:nth-child(3) {
+        grid-column: span 1;
+      }
+      .app-container {
+        border-radius: 28px;
+      }
+      .dashboard {
+        padding: 20px;
+      }
+      .access-card {
+        padding: 32px 24px;
+      }
+      .top-bar {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .inactive-banner {
+        flex-direction: column;
+        gap: 12px;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container" id="appContainer">
+    <!-- ACCESS SCREEN -->
+    <div class="access-screen" id="accessScreen">
+      <div class="access-card">
+        <h1>Top Dog Records</h1>
+        <p>Enter your access ID to continue</p>
+        <div class="access-input-group">
+          <input type="password" id="accessInput" placeholder="ACCESS CODE" maxlength="6" inputmode="numeric" autocomplete="off">
+          <button id="accessBtn"><i class="fas fa-paw"></i> Enter Portal</button>
+        </div>
+        <div class="access-hint"><i class="fas fa-lock"></i> Only authorized members</div>
+      </div>
+    </div>
+
+    <!-- DASHBOARD (hidden until access) -->
+    <div class="dashboard" id="dashboard" style="display: none;">
+      <!-- inactive banner ALWAYS displayed -->
+      <div class="inactive-banner">
+        <div><i class="fas fa-exclamation-circle"></i> Account inactive — please activate to enable full membership benefits.</div>
+        <button class="activate-btn" id="activateBtn"><i class="fas fa-bolt"></i> Activate Now</button>
+      </div>
+
+      <!-- top bar -->
+      <div class="top-bar">
+        <div class="brand">
+          <i class="fas fa-dog"></i>
+          <h2>Top Dog <span>Records</span></h2>
+        </div>
+        <div class="voice-support" id="voiceSupportBtn">
+          <i class="fas fa-volume-up"></i>
+          <span>Voice support</span>
+        </div>
+      </div>
+
+      <!-- main grid -->
+      <div class="dashboard-grid">
+        <!-- new members info -->
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="fas fa-user-plus" style="margin-right: 10px;"></i> New members</h3>
+            <i class="fas fa-chevron-right"></i>
+          </div>
+          <div class="new-members-list" id="newMembersList">
+            <!-- dynamic by JS -->
+          </div>
+        </div>
+
+        <!-- contents / feed -->
+        <div class="card">
+          <div class="card-header">
+            <h3><i class="fas fa-newspaper" style="margin-right: 10px;"></i> Latest content</h3>
+            <i class="fas fa-ellipsis-h"></i>
+          </div>
+          <div id="feedList">
+            <!-- dynamic -->
+          </div>
+        </div>
+
+        <!-- badge, points, profile, digital card -->
+        <div class="card" style="display: flex; flex-direction: column;">
+          <div class="card-header">
+            <h3><i class="fas fa-id-card" style="margin-right: 10px;"></i> Membership</h3>
+            <i class="fas fa-gem"></i>
+          </div>
+
+          <!-- badge & points -->
+          <div class="badge-points">
+            <div class="badge-icon">
+              <i class="fas fa-medal"></i>
+              <span>Gold Fan</span>
+            </div>
+            <div class="points">
+              <span>2,480</span> fan points
+            </div>
+          </div>
+
+          <!-- profile mini -->
+          <div class="profile-mini">
+            <div class="member-avatar" id="profileAvatar">JD</div>
+            <div>
+              <h4 id="profileName">Jordan D.</h4>
+              <p id="profileMemberSince">Member since 2024</p>
+            </div>
+          </div>
+
+          <!-- digital card -->
+          <div class="digital-card-wrapper">
+            <div class="digital-card" id="digitalCard">
+              <div class="card-content">
+                <div class="card-logo">
+                  <i class="fas fa-dog"></i>
+                  <span>TOP DOG RECORDS</span>
+                </div>
+                <div class="card-details">
+                  <h3 id="cardHolderName">Jordan D.</h3>
+                  <div class="member-id" id="cardMemberId">#TDR-2603-88</div>
+                  <div class="validity">VALID THRU 12/28</div>
+                </div>
+                <div class="card-chip"></div>
+                <div class="card-footer">
+                  <span class="name" id="cardFooterName">JORDAN D.</span>
+                  <div class="apple-wallet">
+                    <i class="fab fa-apple"></i> Wallet
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- export actions -->
+          <div class="card-actions">
+            <div class="action-btn" id="exportPngBtn"><i class="fas fa-download"></i> PNG</div>
+            <div class="action-btn" id="exportWalletBtn"><i class="fab fa-apple"></i> Wallet</div>
+            <div class="action-btn" id="exportDocBtn"><i class="fas fa-file-pdf"></i> Doc</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- voice toast -->
+    <div class="voice-toast" id="voiceToast">
+      <i class="fas fa-volume-up"></i>
+      <span id="voiceMessage">Voice support active</span>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      // ---------- CONFIG ----------
+      const ACCESS_CODE = "2603";
+      const MEMBER = {
+        name: "Jordan D.",
+        initials: "JD",
+        memberId: "TDR-2603-88",
+        since: "2024",
+        points: 2480,
+        badge: "Gold Fan"
+      };
+
+      // DOM elements
+      const accessScreen = document.getElementById('accessScreen');
+      const dashboard = document.getElementById('dashboard');
+      const accessInput = document.getElementById('accessInput');
+      const accessBtn = document.getElementById('accessBtn');
+      const voiceSupportBtn = document.getElementById('voiceSupportBtn');
+      const voiceToast = document.getElementById('voiceToast');
+      const voiceMessage = document.getElementById('voiceMessage');
+      const activateBtn = document.getElementById('activateBtn');
+      const exportPngBtn = document.getElementById('exportPngBtn');
+      const exportWalletBtn = document.getElementById('exportWalletBtn');
+      const exportDocBtn = document.getElementById('exportDocBtn');
+
+      // data
+      const newMembers = [
+        { name: "Alex Rivera", initials: "AR", joinDate: "2 hours ago" },
+        { name: "Sam Chen", initials: "SC", joinDate: "5 hours ago" },
+        { name: "Taylor M.", initials: "TM", joinDate: "yesterday" },
+        { name: "Jamie Fox", initials: "JF", joinDate: "2 days ago" }
+      ];
+
+      const feedItems = [
+        { icon: "fa-music", text: "New single 'Midnight Howl' drops Friday", time: "1h ago" },
+        { icon: "fa-video", text: "Behind the scenes: Studio session with Luna", time: "3h ago" },
+        { icon: "fa-gift", text: "Exclusive merch for Gold members", time: "1d ago" },
+        { icon: "fa-calendar", text: "Live Q&A with Top Dog artists", time: "2d ago" }
+      ];
+
+      // ---------- RENDER DYNAMIC CONTENT ----------
+      function renderNewMembers() {
+        const container = document.getElementById('newMembersList');
+        if (!container) return;
+        container.innerHTML = newMembers.map(m => `
+          <div class="member-item">
+            <div class="member-avatar">${m.initials}</div>
+            <div class="member-details">
+              <h4>${m.name}</h4>
+              <p>Joined ${m.joinDate}</p>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function renderFeed() {
+        const container = document.getElementById('feedList');
+        if (!container) return;
+        container.innerHTML = feedItems.map(f => `
+          <div class="feed-item">
+            <div class="feed-icon"><i class="fas ${f.icon}"></i></div>
+            <div class="feed-text">
+              <p>${f.text}</p>
+              <span>${f.time}</span>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function renderMemberInfo() {
+        document.getElementById('profileAvatar').textContent = MEMBER.initials;
+        document.getElementById('profileName').textContent = MEMBER.name;
+        document.getElementById('profileMemberSince').textContent = `Member since ${MEMBER.since}`;
+        document.getElementById('cardHolderName').textContent = MEMBER.name;
+        document.getElementById('cardMemberId').textContent = `#${MEMBER.memberId}`;
+        document.getElementById('cardFooterName').textContent = MEMBER.name.toUpperCase();
+      }
+
+      // ---------- VOICE SUPPORT ----------
+      function speak(text) {
+        if (!('speechSynthesis' in window)) {
+          showVoiceToast('Voice not supported');
+          return;
+        }
+        // Cancel any ongoing speech
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.rate = 0.95;
+        utterance.pitch = 1.0;
+        utterance.volume = 1;
+        utterance.lang = 'en-US';
+        window.speechSynthesis.speak(utterance);
+        showVoiceToast(text);
+      }
+
+      function showVoiceToast(message) {
+        voiceMessage.textContent = message;
+        voiceToast.classList.add('show');
+        setTimeout(() => {
+          voiceToast.classList.remove('show');
+        }, 2800);
+      }
+
+      // Voice support button
+      voiceSupportBtn.addEventListener('click', () => {
+        speak('Voice support active. Your account is currently inactive. Please activate to unlock full membership benefits.');
+      });
+
+      // ---------- INACTIVE ACTIVATE ----------
+      activateBtn.addEventListener('click', () => {
+        speak('Activating your account. Welcome to Top Dog Records full membership.');
+        // Visual feedback
+        activateBtn.innerHTML = '<i class="fas fa-check-circle"></i> Activated';
+        activateBtn.style.background = '#2e7d32';
+        activateBtn.disabled = true;
+        setTimeout(() => {
+          activateBtn.innerHTML = '<i class="fas fa-bolt"></i> Activate Now';
+          activateBtn.style.background = '#ff4b4b';
+          activateBtn.disabled = false;
+        }, 4000);
+      });
+
+      // ---------- EXPORT FUNCTIONS ----------
+      function downloadPNG() {
+        // Create a canvas to draw the digital card
+        const card = document.getElementById('digitalCard');
+        if (!card) return;
+
+        // Use html2canvas approach? Not available. Simulate with canvas drawing.
+        // For simplicity and reliability, we generate a nicely styled PNG with canvas.
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 680;
+        canvas.height = 400;
+        ctx.fillStyle = '#0b0d15';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        // card background
+        const gradient = ctx.createLinearGradient(0, 0, 680, 400);
+        gradient.addColorStop(0, '#161a28');
+        gradient.addColorStop(1, '#0d0f17');
+        ctx.fillStyle = gradient;
+        ctx.shadowColor = '#FFD966';
+        ctx.shadowBlur = 20;
+        ctx.beginPath();
+        ctx.roundRect(40, 40, 600, 320, 24);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+
+        // border glow
+        ctx.strokeStyle = '#FFD966';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.roundRect(40, 40, 600, 320, 24);
+        ctx.stroke();
+
+        // content
+        ctx.fillStyle = '#ffffff';
+        ctx.font = 'bold 28px Inter, sans-serif';
+        ctx.fillText('TOP DOG RECORDS', 70, 110);
+
+        ctx.fillStyle = '#FFD966';
+        ctx.font = 'bold 22px monospace';
+        ctx.fillText(MEMBER.name, 70, 180);
+        ctx.fillStyle = '#FFD966';
+        ctx.font = '18px monospace';
+        ctx.fillText('#' + MEMBER.memberId, 70, 220);
+        ctx.fillStyle = '#7e849e';
+        ctx.font = '14px Inter';
+        ctx.fillText('VALID THRU 12/28', 70, 260);
+
+        ctx.fillStyle = '#ccd0e6';
+        ctx.font = '16px Inter';
+        ctx.fillText('JORDAN D.', 70, 320);
+
+        // Apple wallet badge
+        ctx.fillStyle = '#ffffff20';
+        ctx.beginPath();
+        ctx.roundRect(480, 300, 120, 36, 20);
+        ctx.fill();
+        ctx.fillStyle = '#e0e4fc';
+        ctx.font = '14px Inter';
+        ctx.fillText(' Wallet', 505, 324);
+
+        // Download
+        const link = document.createElement('a');
+        link.download = `TopDog_Membership_${MEMBER.name.replace(' ', '_')}.png`;
+        link.href = canvas.toDataURL('image/png');
+        link.click();
+        speak('Membership card exported as PNG.');
+      }
+
+      function downloadWalletPass() {
+        // Simulate Apple Wallet .pkpass (just a text file, but we make it look real)
+        const content = `Top Dog Records Membership Pass\nMember: ${MEMBER.name}\nID: ${MEMBER.memberId}\nStatus: Active\nBadge: Gold Fan\nPoints: ${MEMBER.points}\n--- Apple Wallet compatible ---`;
+        const blob = new Blob([content], { type: 'application/vnd.apple.pkpass' });
+        const link = document.createElement('a');
+        link.download = `TopDog_Membership_${MEMBER.name.replace(' ', '_')}.pkpass`;
+        link.href = URL.createObjectURL(blob);
+        link.click();
+        speak('Apple Wallet pass downloaded. Add to Wallet for easy access.');
+      }
+
+      function downloadDocument() {
+        // Create a simple PDF-like text document (actually .txt for simplicity, but named .pdf? better as .txt to avoid broken)
+        const docContent = `
+TOP DOG RECORDS - MEMBERSHIP DOCUMENT
+=====================================
+Member: ${MEMBER.name}
+Member ID: ${MEMBER.memberId}
+Member Since: ${MEMBER.since}
+Badge: ${MEMBER.badge}
+Fan Points: ${MEMBER.points}
+
+This document certifies active membership (pending activation). 
+For full benefits, please activate your account in the portal.
+        `;
+        const blob = new Blob([docContent], { type: 'text/plain' });
+        const link = document.createElement('a');
+        link.download = `TopDog_Membership_Document_${MEMBER.name.replace(' ', '_')}.txt`;
+        link.href = URL.createObjectURL(blob);
+        link.click();
+        speak('Membership document exported.');
+      }
+
+      // ---------- ACCESS CONTROL ----------
+      function grantAccess() {
+        accessScreen.classList.add('hidden');
+        dashboard.style.display = 'flex';
+        // Render dynamic content
+        renderNewMembers();
+        renderFeed();
+        renderMemberInfo();
+
+        // Welcome voice
+        setTimeout(() => {
+          speak('Welcome Jordan. Your account is inactive. Please activate to unlock full membership benefits.');
+        }, 600);
+      }
+
+      function checkAccess() {
+        const entered = accessInput.value.trim();
+        if (entered === ACCESS_CODE) {
+          grantAccess();
+        } else {
+          // error shake
+          accessInput.style.borderColor = '#ff4b4b';
+          accessInput.style.boxShadow = '0 0 0 4px rgba(255, 75, 75, 0.2)';
+          setTimeout(() => {
+            accessInput.style.borderColor = '#2e3348';
+            accessInput.style.boxShadow = 'none';
+          }, 1000);
+          speak('Invalid access code. Please try again.');
+        }
+      }
+
+      // ---------- EVENT LISTENERS ----------
+      accessBtn.addEventListener('click', checkAccess);
+      accessInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') checkAccess();
+      });
+
+      exportPngBtn.addEventListener('click', downloadPNG);
+      exportWalletBtn.addEventListener('click', downloadWalletPass);
+      exportDocBtn.addEventListener('click', downloadDocument);
+
+      // Preset demo access? No, user must enter 2603.
+      // But for convenience, we could auto-fill? Not needed, but user can test.
+      // Add a small hint: (demo 2603)
+      accessInput.placeholder = 'ACCESS CODE (2603 demo)';
+
+      // Additional voice on hover of card?
+      document.getElementById('digitalCard')?.addEventListener('mouseenter', () => {
+        // subtle voice? optional skip
+      });
+
+      // Polyfill for canvas roundRect
+      CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+        if (w < 2 * r) r = w / 2;
+        if (h < 2 * r) r = h / 2;
+        this.moveTo(x + r, y);
+        this.lineTo(x + w - r, y);
+        this.quadraticCurveTo(x + w, y, x + w, y + r);
+        this.lineTo(x + w, y + h - r);
+        this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+        this.lineTo(x + r, y + h);
+        this.quadraticCurveTo(x, y + h, x, y + h - r);
+        this.lineTo(x, y + r);
+        this.quadraticCurveTo(x, y, x + r, y);
+        return this;
+      };
+    })();
+  </script>
+</body>
+</html>
